@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.UUID;
 
@@ -12,17 +13,17 @@ import java.util.UUID;
 @Data
 public class User {
     @Getter
-    @Id private final UUID id;
-    private String name;
-    private String email;
-    private String password;
-    private Profile profile;
+    @Id private UUID id;
+    @Field private String name;
+    @Field private String email;
+    @Field private String password;
+    @Field private Profile profile;
 
-    public User(String _name, String _email, String _password, Profile _profile){
+    public User(String name, String email, String password, Profile profile){
         this.id = UUID.randomUUID();
-        this.name = _name;
-        this.email = _email;
-        this.password = _password;
-        this.profile = _profile;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.profile = profile;
     }
 }

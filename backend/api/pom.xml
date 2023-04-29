@@ -55,6 +55,7 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
+						<excludeDevtools>true</excludeDevtools>
 					</excludes>
 				</configuration>
 			</plugin>

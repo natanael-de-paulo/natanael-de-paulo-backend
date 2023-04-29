@@ -1,26 +1,28 @@
 package io.github.natanaeldepaulo.api.infrastructure.repositories;
 
+import io.github.natanaeldepaulo.api.domain.entities.User;
 import io.github.natanaeldepaulo.api.domain.interfaces.IUserRepository;
-import io.github.natanaeldepaulo.api.application.services.CreateUserRequest;
+import io.github.natanaeldepaulo.api.application.dto.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Repository
-@EnableAsync
 public abstract class UserRepositoryImpl implements IUserRepository {
     @Autowired
     private MongoTemplate _mongoTemplate;
 
     @Override
-    public void save(CreateUserRequest user) {
+    public void save(UserRequest user) {
         _mongoTemplate.save(user);
     }
 
-//    @Override
-//    public Optional<UserAccount> findById(String _id) {
-//        var query = _mongoTemplate.findById(_id, UserAccount.class);
-//        return Optional.of(query);
-//    }
+    @Override
+    public Optional<User> findById(UUID id) {
+        User query = _mongoTemplate.findById(id, User.class, "users");
+        return Optional.of(query);
+    }
 }
