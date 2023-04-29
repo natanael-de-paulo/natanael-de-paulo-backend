@@ -22,10 +22,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity me(@PathVariable String id){
-        Optional<UserResponse> response = _userService.findUserById(id);
-        var result = response.map( u -> new UserResponse(u.getId(), u.getName(), u.getEmail(), u.getProfile()));
-
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        var response = _userService.findUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping("/create")
