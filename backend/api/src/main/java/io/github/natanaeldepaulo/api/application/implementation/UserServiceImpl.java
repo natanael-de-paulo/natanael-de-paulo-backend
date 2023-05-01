@@ -21,10 +21,10 @@ public final class UserServiceImpl implements IUserService {
     public String create(UserRequest request) {
         var profile = new Profile(request.profile);
         var user = new User(request.name, request.email, request.password, profile);
-
         _userRepository.save(user);
         return user.getId().toString();
     }
+
 
     @Override
     public Optional<UserResponse> findUserById(String id) {
