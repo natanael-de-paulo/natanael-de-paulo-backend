@@ -1,8 +1,8 @@
 package io.github.natanaeldepaulo.api.application.implementation;
 
-import io.github.natanaeldepaulo.api.application.dto.UserRequest;
+import io.github.natanaeldepaulo.api.application.specification.UserRequest;
 import io.github.natanaeldepaulo.api.application.IUserService;
-import io.github.natanaeldepaulo.api.application.dto.UserResponse;
+import io.github.natanaeldepaulo.api.application.specification.UserResponse;
 import io.github.natanaeldepaulo.api.domain.embedded.Profile;
 import io.github.natanaeldepaulo.api.domain.interfaces.IUserRepository;
 import io.github.natanaeldepaulo.api.domain.entities.User;

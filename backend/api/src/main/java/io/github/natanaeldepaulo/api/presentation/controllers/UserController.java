@@ -1,17 +1,11 @@
 package io.github.natanaeldepaulo.api.presentation.controllers;
 
-import io.github.natanaeldepaulo.api.application.dto.UserRequest;
+import io.github.natanaeldepaulo.api.application.specification.UserRequest;
 import io.github.natanaeldepaulo.api.application.IUserService;
-import io.github.natanaeldepaulo.api.application.dto.UserResponse;
-import io.github.natanaeldepaulo.api.domain.entities.User;
-import io.github.natanaeldepaulo.api.domain.interfaces.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")

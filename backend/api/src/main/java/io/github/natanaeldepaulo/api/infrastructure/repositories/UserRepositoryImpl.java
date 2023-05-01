@@ -2,7 +2,7 @@ package io.github.natanaeldepaulo.api.infrastructure.repositories;
 
 import io.github.natanaeldepaulo.api.domain.entities.User;
 import io.github.natanaeldepaulo.api.domain.interfaces.IUserRepository;
-import io.github.natanaeldepaulo.api.application.dto.UserRequest;
+import io.github.natanaeldepaulo.api.application.specification.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
