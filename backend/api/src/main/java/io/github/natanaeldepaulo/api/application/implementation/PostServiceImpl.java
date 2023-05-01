@@ -17,8 +17,9 @@ public class PostServiceImpl implements IPostService {
     IPostRepository _postRepository;
 
     @Override
-    public Optional<Post> create(PostRequest post, String profile_id){
+    public Optional<PostResponse> create(PostRequest post, String profile_id){
         UUID _profile_id = UUID.fromString(profile_id);
+
         var newPost = new Post(
                 post.getTitle(),
                 post.getDescription(),
@@ -29,16 +30,17 @@ public class PostServiceImpl implements IPostService {
 
         var createdPost =  _postRepository.save(newPost);
 
-//       var t = createdPost.map(p -> new PostResponse(
-//                p.getId(),
-//                p.getTitle(),
-//                p.getDescription(),
-//                p.getImage(),
-//                p.getImageUrl(),
-//                p.getProfile_id()
-//        ));
+        var response = new PostResponse(
+                createdPost.getId(),
+                createdPost.getTitle(),
+                createdPost.getDescription(),
+                createdPost.getImage(),
+                createdPost.getImageUrl(),
+                createdPost.getProfile_id(),
+                createdPost.getComments(),
+                createdPost.getLikes()
+        );
 
-
-        return Optional.of(newPost);
+        return Optional.of(response);
     }
 }

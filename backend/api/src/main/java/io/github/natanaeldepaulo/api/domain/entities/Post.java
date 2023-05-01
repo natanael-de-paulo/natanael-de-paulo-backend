@@ -3,20 +3,29 @@ package io.github.natanaeldepaulo.api.domain.entities;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.embedded.Likes;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Document(collection = "posts")
 @Data
+@NoArgsConstructor
 public class Post {
-    @Id private final UUID id;
+    @Getter
+    @Id private  UUID id;
     private String title;
     private String description;
     private Boolean image = false;
     private String imageUrl;
     private UUID profile_id;;
+    private List<Comment> comments;
+    private List<Likes> likes;
+
 
     public Post(String title, String description, Boolean image, String imageUrl, UUID profile_id){
         this.id = UUID.randomUUID();
@@ -25,5 +34,7 @@ public class Post {
         this.image = image;
         this.imageUrl = imageUrl;
         this.profile_id = profile_id;
+        this.comments = new ArrayList<>();
+        this.likes = new ArrayList<>();
     }
 }

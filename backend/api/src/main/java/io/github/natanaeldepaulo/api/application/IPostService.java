@@ -7,5 +7,5 @@ import io.github.natanaeldepaulo.api.domain.entities.Post;
 import java.util.Optional;
 
 public interface IPostService {
-    Optional<Post> create(PostRequest post, String profile_id);
+    Optional<PostResponse> create(PostRequest post, String profile_id);
 }

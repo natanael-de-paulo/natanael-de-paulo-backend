@@ -8,5 +8,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IPostRepository extends MongoRepository<Post, UUID> {
-    void save(PostRequest post);
+    Post save(Post post);
 }
