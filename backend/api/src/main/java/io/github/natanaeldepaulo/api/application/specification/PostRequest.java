@@ -10,5 +10,4 @@ public class PostRequest {
     private String description;
     private Boolean image = false;
     private String imageUrl;
-    private UUID profile;
 }

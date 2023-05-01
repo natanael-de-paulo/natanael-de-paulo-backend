@@ -17,28 +17,20 @@ public class PostServiceImpl implements IPostService {
     IPostRepository _postRepository;
 
     @Override
-    public Optional<PostResponse> create(PostRequest post, String profile_id){
-        UUID _profile_id = UUID.fromString(profile_id);
-
-        var newPost = new Post(
-                post.getTitle(),
-                post.getDescription(),
-                post.getImage(),
-                post.getImageUrl(),
-                _profile_id
-        );
-
-        var createdPost =  _postRepository.save(newPost);
+    public Optional<PostResponse> create(PostRequest request, String profile_id){
+        var profileId = UUID.fromString(profile_id);
+        var post = Post.create(request, profileId);
+        _postRepository.save(post);
 
         var response = new PostResponse(
-                createdPost.getId(),
-                createdPost.getTitle(),
-                createdPost.getDescription(),
-                createdPost.getImage(),
-                createdPost.getImageUrl(),
-                createdPost.getProfile_id(),
-                createdPost.getComments(),
-                createdPost.getLikes()
+            post.getId(),
+            post.getTitle(),
+            post.getDescription(),
+            post.getImage(),
+            post.getImageUrl(),
+            post.getProfile_id(),
+            post.getComments(),
+            post.getLikes()
         );
 
         return Optional.of(response);

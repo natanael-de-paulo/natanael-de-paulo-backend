@@ -16,11 +16,10 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private IPostService postService;
-
     @PostMapping("/create")
     public ResponseEntity<Optional<PostResponse>> createPost(@RequestBody PostRequest request, @RequestParam String profile_id){
         var response = postService.create(request, profile_id);
-        return  ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);
     }
 
 }
