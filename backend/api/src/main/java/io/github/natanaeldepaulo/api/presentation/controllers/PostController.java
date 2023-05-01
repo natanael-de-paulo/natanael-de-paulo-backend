@@ -16,6 +16,14 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private IPostService postService;
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<PostResponse>> findById(@PathVariable String id){
+        var response = postService.findById(id);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Optional<PostResponse>> createPost(@RequestBody PostRequest request, @RequestParam String profile_id){
         var response = postService.create(request, profile_id);

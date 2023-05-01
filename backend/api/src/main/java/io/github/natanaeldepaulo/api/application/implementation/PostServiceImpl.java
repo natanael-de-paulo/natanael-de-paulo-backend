@@ -17,6 +17,25 @@ public class PostServiceImpl implements IPostService {
     IPostRepository _postRepository;
 
     @Override
+    public Optional<PostResponse> findById(String post_id){
+        var postId = UUID.fromString(post_id);
+        var post = _postRepository.findById(postId);
+
+        var response = new PostResponse(
+                post.get().getId(),
+                post.get().getTitle(),
+                post.get().getDescription(),
+                post.get().getImage(),
+                post.get().getImageUrl(),
+                post.get().getProfile_id(),
+                post.get().getComments(),
+                post.get().getLikes()
+        );
+
+        return Optional.of(response);
+    }
+
+    @Override
     public Optional<PostResponse> create(PostRequest request, String profile_id){
         var profileId = UUID.fromString(profile_id);
         var post = Post.create(request, profileId);
