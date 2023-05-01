@@ -19,8 +19,8 @@ public final class UserServiceImpl implements IUserService {
 
     @Override
     public String create(UserRequest request) {
-        var profile = new Profile(request.profile);
-        var user = new User(request.name, request.email, request.password, profile);
+        var profile = Profile.create(request.profile);
+        var user = User.create(request.name, request.email, request.password, profile);
         _userRepository.save(user);
         return user.getId().toString();
     }

@@ -1,25 +1,28 @@
 package io.github.natanaeldepaulo.api.domain.embedded;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
-@Data
+@Getter
 public class Profile {
-    @Id private final UUID id;
+    @Id private UUID id;
     private String name;
     private Boolean image = false;
     private String imageURL;
 
-    public Profile(Profile profile){
+    public Profile(){}
+
+    private Profile(Profile profile){
         this.id = UUID.randomUUID();
         this.name = profile.name;
         this.image = profile.image;
         this.imageURL = profile.imageURL;
+    }
+
+    public static Profile create(Profile profile){
+        return new Profile(profile);
     }
 
 }
