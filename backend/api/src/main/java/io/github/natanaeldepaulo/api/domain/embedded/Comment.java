@@ -1,28 +1,35 @@
 package io.github.natanaeldepaulo.api.domain.embedded;
 
-import io.github.natanaeldepaulo.api.domain.entities.Post;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter
 public class Comment {
-    @Id private final UUID id;
+    @Id private UUID id;
     private String description;
     private UUID post_id;
     private UUID profile_id;
     private List<Likes> likes;
 
-    public Comment(String description, Post post, Profile profile){
+
+    public Comment(){}
+
+    private Comment(String description, UUID post_id, UUID profile_id){
         this.id = UUID.randomUUID();
         this.description = description;
-        this.post_id = post.getId();
-        this.profile_id = profile.getId();
+        this.post_id = post_id;
+        this.profile_id = profile_id;
         this.likes = new ArrayList<>();
     }
+
+    public static Comment create(String description, UUID post_id, UUID profile_id ){
+        return new Comment(description, post_id, profile_id);
+    }
+
+
 }

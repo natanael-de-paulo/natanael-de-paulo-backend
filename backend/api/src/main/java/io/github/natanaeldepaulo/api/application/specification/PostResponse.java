@@ -13,12 +13,12 @@ import java.util.UUID;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostResponse {
-    private UUID id;
+    private final UUID id;
     private String title;
     private String description;
     private Boolean image = false;
     private String imageUrl;
-    private UUID profile_id;
+    private final UUID profile_id;
     private List<Comment> comments;
     private List<Likes> likes;
 

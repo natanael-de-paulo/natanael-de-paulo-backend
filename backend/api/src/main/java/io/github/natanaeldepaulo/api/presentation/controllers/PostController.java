@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/v1/post")
+@RequestMapping("/v1/post/")
 public class PostController {
     @Autowired
     private IPostService postService;
@@ -29,5 +29,4 @@ public class PostController {
         var response = postService.create(request, profile_id);
         return ResponseEntity.ok(response);
     }
-
 }
