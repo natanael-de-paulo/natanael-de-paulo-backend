@@ -18,11 +18,11 @@ public class CommentController {
     private ICommentService commentService;
 
 
-//    @GetMapping("/{commentId}")
-//    public ResponseEntity<Optional<CommentResponse>> findById(@PathVariable String commentId){
-//        var response = commentService.findById(id);
-//        return ResponseEntity.ok(response);
-//    }
+    @GetMapping("/{commentId}")
+    public ResponseEntity<CommentResponse> findById(@PathVariable String postId, @PathVariable String commentId){
+        var response = commentService.findById(postId, commentId);
+        return ResponseEntity.ok().body(response);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Optional<CommentResponse>> createComment(@PathVariable String postId, @RequestParam String profileId, @RequestBody CommentRequest request){
