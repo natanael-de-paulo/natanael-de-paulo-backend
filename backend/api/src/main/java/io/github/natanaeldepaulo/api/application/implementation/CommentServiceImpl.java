@@ -32,7 +32,7 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public Optional<CommentResponse> create(CommentRequest request, String postId, String profileId){
+    public CommentResponse create(CommentRequest request, String postId, String profileId){
         var comment = Comment.create(
                 request.description,
                 ConvertFormatId.toUUID(postId) ,

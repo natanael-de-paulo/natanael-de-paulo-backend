@@ -39,17 +39,18 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public void saveCommentToList(Comment comment, String postId){
+    public void saveCommentToList(Comment comment, String postId) {
         var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
         post.get().getComments().add(comment);
         _postRepository.save(post.get());
-
-    @Override
-    public void update(PostRequest dataToUpdate, String postId){
-       var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
-       post.get().setTitle(dataToUpdate.getTitle());
-       post.get().setTitle(dataToUpdate.getDescription());
-
-       _postRepository.save(post.get());
     }
+
+//    @Override
+//    public void update(PostRequest dataToUpdate, String postId){
+//       var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+//       post.get().setTitle(dataToUpdate.getTitle());
+//       post.get().setTitle(dataToUpdate.getDescription());
+//
+//       _postRepository.save(post.get());
+//    }
 }

@@ -30,7 +30,7 @@ public class CommentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Optional<CommentResponse>> createComment(@PathVariable String postId, @RequestParam String profileId, @RequestBody CommentRequest request){
+    public ResponseEntity<CommentResponse> createComment(@PathVariable String postId, @RequestParam String profileId, @RequestBody CommentRequest request){
         var response = commentService.create(request, postId, profileId);
         return ResponseEntity.ok(response);
     }

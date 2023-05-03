@@ -10,5 +10,4 @@ public interface IPostService {
     Optional<PostResponse> create(PostRequest post, String profile_id);
     Optional<PostResponse> findById(String post_id);
     void saveCommentToList(Comment comment, String postId);
-    void update(PostRequest dataToUpdate, String postId);
 }

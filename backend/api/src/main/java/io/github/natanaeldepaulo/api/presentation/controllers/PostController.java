@@ -31,10 +31,10 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{postId}")
-    public ResponseEntity<String> updatePost(@PathVariable String postId, @RequestBody PostRequest request){
-        postService.update(request, postId);
-        return ResponseEntity.ok().body("successfully updated");
-    }
+//    @PutMapping("/{postId}")
+//    public ResponseEntity<String> updatePost(@PathVariable String postId, @RequestBody PostRequest request){
+//        postService.update(request, postId);
+//        return ResponseEntity.ok().body("successfully updated");
+//    }
 
 }

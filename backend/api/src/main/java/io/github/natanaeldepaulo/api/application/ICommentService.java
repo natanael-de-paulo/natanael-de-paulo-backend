@@ -9,6 +9,5 @@ import java.util.Optional;
 
 public interface ICommentService {
     CommentResponse create(CommentRequest request, String postId, String profileId);
-    Optional<CommentResponse> create(CommentRequest request, String postId, String profileId);
     CommentResponse findById(String postId, String commentId);
 }
