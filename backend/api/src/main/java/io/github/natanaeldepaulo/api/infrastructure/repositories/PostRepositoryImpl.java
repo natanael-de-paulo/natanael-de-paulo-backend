@@ -10,17 +10,25 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public abstract class PostRepositoryImpl implements IPostRepository {
+public abstract class PostRepositoryImpl implements IPostRepository  {
     @Autowired
     private MongoTemplate _mongoTemplate;
 
-    @Override
+
     public Post save(Post post) {
         return _mongoTemplate.save(post);
     }
 
+
     public Optional<Post> findById(UUID post_id){
-        var query = _mongoTemplate.findById(post_id, Post.class);
-        return Optional.ofNullable(query);
+        return Optional.ofNullable(_mongoTemplate.findById(post_id, Post.class));
     }
+
+//    public void update(UUID postId, PostRequest dataToUpdate){
+//        Query query = new Query(Criteria.where("_id").is(postId));
+//        Update update = new Update();
+//        update.set("title", dataToUpdate.getTitle());
+//        update.set("description", dataToUpdate.getDescription());
+//        _mongoTemplate.updateFirst(query, update, Post.class);
+//    }
 }

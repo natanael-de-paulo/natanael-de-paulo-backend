@@ -3,6 +3,7 @@ package io.github.natanaeldepaulo.api.application.specification;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.embedded.Likes;
+import io.github.natanaeldepaulo.api.domain.entities.Post;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,14 +23,14 @@ public class PostResponse {
     private List<Comment> comments;
     private List<Likes> likes;
 
-    public PostResponse(UUID id, String title, String description, Boolean image, String imageUrl, UUID profile_id, List<Comment> comments, List<Likes> likes) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.image = image;
-        this.imageUrl = imageUrl;
-        this.profile_id = profile_id;
-        this.comments = comments;
-        this.likes = likes;
+    public PostResponse(Post params) {
+        this.id = params.getId();
+        this.title = params.getTitle();
+        this.description = params.getDescription();
+        this.image = params.getImage();
+        this.imageUrl = params.getImageUrl();
+        this.profile_id = params.getProfile_id();
+        this.comments = params.getComments();
+        this.likes = params.getLikes();
     }
 }

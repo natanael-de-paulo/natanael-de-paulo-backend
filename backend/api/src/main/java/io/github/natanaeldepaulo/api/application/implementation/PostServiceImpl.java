@@ -3,6 +3,7 @@ package io.github.natanaeldepaulo.api.application.implementation;
 import io.github.natanaeldepaulo.api.application.IPostService;
 import io.github.natanaeldepaulo.api.application.specification.PostRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostResponse;
+import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import io.github.natanaeldepaulo.api.domain.interfaces.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,10 @@ public class PostServiceImpl implements IPostService {
     IPostRepository _postRepository;
 
     @Override
-    public Optional<PostResponse> findById(String post_id){
-        var postId = UUID.fromString(post_id);
-        var post = _postRepository.findById(postId);
+    public Optional<PostResponse> findById(String postId){
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
 
-        var response = new PostResponse(
-                post.get().getId(),
-                post.get().getTitle(),
-                post.get().getDescription(),
-                post.get().getImage(),
-                post.get().getImageUrl(),
-                post.get().getProfile_id(),
-                post.get().getComments(),
-                post.get().getLikes()
-        );
+        var response = new PostResponse(post.get());
 
         return Optional.of(response);
     }
@@ -41,17 +32,16 @@ public class PostServiceImpl implements IPostService {
         var post = Post.create(request, profileId);
         _postRepository.save(post);
 
-        var response = new PostResponse(
-            post.getId(),
-            post.getTitle(),
-            post.getDescription(),
-            post.getImage(),
-            post.getImageUrl(),
-            post.getProfile_id(),
-            post.getComments(),
-            post.getLikes()
-        );
+        var response = new PostResponse(post);
 
         return Optional.of(response);
+    }
+    @Override
+    public void update(PostRequest dataToUpdate, String postId){
+       var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+       post.get().setTitle(dataToUpdate.getTitle());
+       post.get().setTitle(dataToUpdate.getDescription());
+
+       _postRepository.save(post.get());
     }
 }
