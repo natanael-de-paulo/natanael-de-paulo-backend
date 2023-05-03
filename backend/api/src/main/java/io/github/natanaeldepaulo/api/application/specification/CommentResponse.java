@@ -17,7 +17,6 @@ public class CommentResponse {
     private UUID profile_id;
     private List<Likes> likes;
 
-
     public CommentResponse(Comment params) {
         this.id = params.getId();
         this.description = params.getDescription();

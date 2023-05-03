@@ -6,6 +6,10 @@ import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
 import io.github.natanaeldepaulo.api.application.specification.CommentResponse;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
+import io.github.natanaeldepaulo.api.domain.interfaces.IPostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,7 @@ import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements ICommentService {
+
     @Autowired
     private IPostService postService;
 
@@ -34,10 +39,7 @@ public class CommentServiceImpl implements ICommentService {
                 ConvertFormatId.toUUID(profileId)
         );
 
-        var post = postService.findById(postId);
-        post.get().getComments().add(comment);
-        return Optional.of(new CommentResponse(comment));
+        postService.saveCommentToList(comment, comment.getPost_id().toString());
+        return new CommentResponse(comment);
     }
-
-
 }

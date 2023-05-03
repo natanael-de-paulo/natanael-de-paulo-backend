@@ -17,6 +17,11 @@ public class CommentController {
     @Autowired
     private ICommentService commentService;
 
+//    @GetMapping("/{commentId}")
+//    public ResponseEntity<Optional<CommentResponse>> findById(@PathVariable String commentId){
+//        var response = commentService.findById(id);
+//        return ResponseEntity.ok(response);
+//    }
 
     @GetMapping("/{commentId}")
     public ResponseEntity<CommentResponse> findById(@PathVariable String postId, @PathVariable String commentId){

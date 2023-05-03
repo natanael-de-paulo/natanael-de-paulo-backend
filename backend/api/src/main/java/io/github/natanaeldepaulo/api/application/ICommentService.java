@@ -4,9 +4,11 @@ import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
 import io.github.natanaeldepaulo.api.application.specification.CommentResponse;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 
+
 import java.util.Optional;
 
 public interface ICommentService {
+    CommentResponse create(CommentRequest request, String postId, String profileId);
     Optional<CommentResponse> create(CommentRequest request, String postId, String profileId);
     CommentResponse findById(String postId, String commentId);
 }
