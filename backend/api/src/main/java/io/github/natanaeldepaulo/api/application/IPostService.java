@@ -4,10 +4,12 @@ import io.github.natanaeldepaulo.api.application.specification.PostRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostResponse;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IPostService {
-    Optional<PostResponse> create(PostRequest post, String profile_id);
-    Optional<PostResponse> findById(String post_id);
+    List<PostResponse> findPosts(String profileId);
+    Optional<PostResponse> findPostById(String post_id);
+    Optional<PostResponse> createPost(PostRequest post, String profile_id);
     void saveCommentToList(Comment comment, String postId);
 }

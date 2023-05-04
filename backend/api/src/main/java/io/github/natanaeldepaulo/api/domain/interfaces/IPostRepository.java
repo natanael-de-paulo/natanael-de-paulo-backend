@@ -1,18 +1,13 @@
 package io.github.natanaeldepaulo.api.domain.interfaces;
 
-import io.github.natanaeldepaulo.api.application.specification.PostRequest;
-import io.github.natanaeldepaulo.api.application.specification.PostResponse;
-import io.github.natanaeldepaulo.api.application.specification.UserRequest;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.mongodb.repository.Query;
 
-import java.io.Serializable;
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
-
 public interface IPostRepository extends MongoRepository<Post, UUID> {
-    Post save(Post post);
-    Optional<Post> findById(UUID post_id);
+    @Query("{profile_id: ?0}")
+    List<Post> findAll(UUID profile_id);
 }

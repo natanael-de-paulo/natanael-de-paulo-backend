@@ -10,24 +10,32 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/v1/post/")
+@RequestMapping("/v1/posts/")
 public class PostController {
     @Autowired
     private IPostService postService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<PostResponse>> findById(@PathVariable String id){
-        var response = postService.findById(id);
+    @GetMapping
+    public  ResponseEntity<List<PostResponse>> getPosts(@RequestParam String profileId){
+        var response = postService.findPosts(profileId);
+        return ResponseEntity.ok().body(response);
+    }
+
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<Optional<PostResponse>> getPostById(@PathVariable String postId){
+        var response = postService.findPostById(postId);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/create")
     public ResponseEntity<Optional<PostResponse>> createPost(@RequestBody PostRequest request, @RequestParam String profile_id){
-        var response = postService.create(request, profile_id);
+        var response = postService.createPost(request, profile_id);
         return ResponseEntity.ok(response);
     }
 

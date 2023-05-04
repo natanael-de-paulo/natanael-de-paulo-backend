@@ -6,16 +6,10 @@ import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
 import io.github.natanaeldepaulo.api.application.specification.CommentResponse;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
-import io.github.natanaeldepaulo.api.domain.interfaces.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements ICommentService {
@@ -26,7 +20,7 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public CommentResponse findById(String postId, String commentId){
         var _commentId = ConvertFormatId.toUUID(commentId);
-        List<Comment> comments = postService.findById(postId).get().getComments();
+        List<Comment> comments = postService.findPostById(postId).get().getComments();
         var comment = comments.stream().filter(c -> c.getId().equals(_commentId)).findFirst();
         return new CommentResponse(comment.get());
     }
