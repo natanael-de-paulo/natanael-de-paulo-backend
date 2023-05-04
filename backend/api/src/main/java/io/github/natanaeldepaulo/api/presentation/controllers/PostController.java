@@ -46,4 +46,10 @@ public class PostController {
         return ResponseEntity.ok().body("successfully updated");
     }
 
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<String> deletePost(@PathVariable String postId) throws Exception {
+        postService.deletePost(postId);
+        return ResponseEntity.ok().body("successfully deleted");
+    }
+
 }

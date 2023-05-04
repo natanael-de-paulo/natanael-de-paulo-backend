@@ -64,6 +64,13 @@ public class PostServiceImpl implements IPostService {
         _postRepository.save(post.get());
     }
 
+    @Override
+    public void deletePost(String postId) throws Exception{
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+        if (!post.isPresent()) throw new Exception("Post not found!");
+        _postRepository.delete(post.get());
+    }
+
 
     @Override
     public void saveCommentToList(Comment comment, String postId) {
