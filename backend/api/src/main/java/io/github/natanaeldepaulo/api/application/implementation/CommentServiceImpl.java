@@ -46,4 +46,14 @@ public class CommentServiceImpl implements ICommentService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    @Override
+    public String deleteCommentToPost(String postId, String commentId){
+        try {
+            postService.deleteCommentToPost(postId, commentId);
+            return "Deleted comment";
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

@@ -14,5 +14,5 @@ public interface IPostService {
     Optional<PostResponse> createPost(PostRequest post, String profile_id);
     void saveCommentToList(Comment comment, String postId);
     void updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate) throws Exception;
-
+    void deleteCommentToPost(String postId, String commentId) throws Exception;
 }

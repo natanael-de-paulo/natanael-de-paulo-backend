@@ -7,4 +7,5 @@ public interface ICommentService {
     CommentResponse create(CommentRequest request, String postId, String profileId);
     CommentResponse findById(String postId, String commentId);
     String updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate);
+    String deleteCommentToPost(String postId, String commentId);
 }

@@ -36,4 +36,11 @@ public class CommentController {
         var response = commentService.updateCommentToPost(postId, commentId, dataToUpdate);
         return ResponseEntity.ok().body(response);
     }
+
+    @DeleteMapping("/{commentId}")
+    public  ResponseEntity<String> deleteComment(@PathVariable String postId, @PathVariable String commentId){
+        var response = commentService.deleteCommentToPost(postId, commentId);
+        return ResponseEntity.ok().body(response);
+    }
+
 }

@@ -72,6 +72,21 @@ public class PostServiceImpl implements IPostService {
         _postRepository.save(post.get());
     }
 
+    @Override
+    public void deleteCommentToPost(String postId, String commentId) throws Exception {
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+        if (!post.isPresent()) throw new Exception("Post not found!");
+
+        var comment = post.get().getComments().stream()
+                .filter(c -> c.getId().equals(ConvertFormatId.toUUID(commentId)))
+                .findFirst();
+
+        if (!comment.isPresent()) throw new Exception("Comment not found!");
+
+        post.get().getComments().remove(comment.get());
+        _postRepository.save(post.get());
+    }
+
 
 //    @Override
 //    public void update(PostRequest dataToUpdate, String postId){
