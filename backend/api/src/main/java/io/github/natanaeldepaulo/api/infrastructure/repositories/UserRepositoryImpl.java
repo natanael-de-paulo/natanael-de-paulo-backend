@@ -5,7 +5,10 @@ import io.github.natanaeldepaulo.api.domain.interfaces.IUserRepository;
 import io.github.natanaeldepaulo.api.application.specification.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
+
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -21,8 +24,14 @@ public abstract class UserRepositoryImpl implements IUserRepository {
     }
 
     @Override
-    public Optional<User> findById(UUID id) {
-        User query = _mongoTemplate.findById(id, User.class, "users");
+    public Optional<User> findById(UUID _id) {
+        var query = _mongoTemplate.findById(_id, User.class);
         return Optional.of(query);
+    }
+
+    @Override
+    public User findByEmail(String email){
+        Query query = new Query(Criteria.where("email").is(email));
+        return _mongoTemplate.findOne(query, User.class);
     }
 }

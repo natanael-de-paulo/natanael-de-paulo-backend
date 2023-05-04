@@ -1,11 +1,13 @@
 package io.github.natanaeldepaulo.api.domain.embedded;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
 @Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile {
     @Id private UUID id;
     private String name;

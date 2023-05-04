@@ -1,6 +1,7 @@
 package io.github.natanaeldepaulo.api.domain.interfaces;
 
 import io.github.natanaeldepaulo.api.application.specification.PostRequest;
+import io.github.natanaeldepaulo.api.application.specification.PostResponse;
 import io.github.natanaeldepaulo.api.application.specification.UserRequest;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
