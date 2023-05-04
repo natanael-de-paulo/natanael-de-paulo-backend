@@ -1,6 +1,7 @@
 package io.github.natanaeldepaulo.api.application.implementation;
 
 import io.github.natanaeldepaulo.api.application.IPostService;
+import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostResponse;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
@@ -56,6 +57,21 @@ public class PostServiceImpl implements IPostService {
         post.get().getComments().add(comment);
         _postRepository.save(post.get());
     }
+
+    @Override
+    public void updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate) throws Exception {
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+        if (!post.isPresent()) throw new Exception("Post not found!");
+
+        var comment = post.get().getComments().stream()
+                .filter(c -> c.getId().equals(ConvertFormatId.toUUID(commentId)))
+                .findFirst();
+
+        if (!comment.isPresent()) throw new Exception("Comment not found!");
+        comment.get().setDescription(dataToUpdate.description);
+        _postRepository.save(post.get());
+    }
+
 
 //    @Override
 //    public void update(PostRequest dataToUpdate, String postId){

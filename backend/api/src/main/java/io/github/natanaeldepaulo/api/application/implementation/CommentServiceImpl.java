@@ -36,4 +36,14 @@ public class CommentServiceImpl implements ICommentService {
         postService.saveCommentToList(comment, comment.getPost_id().toString());
         return new CommentResponse(comment);
     }
+
+    @Override
+    public String updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate){
+        try {
+            postService.updateCommentToPost(postId, commentId, dataToUpdate);
+            return "Updated comment";
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

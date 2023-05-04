@@ -2,6 +2,7 @@ package io.github.natanaeldepaulo.api.domain.embedded;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Getter
 public class Comment {
     @Id private UUID id;
-    private String description;
+    @Setter private String description;
     private UUID post_id;
     private UUID profile_id;
     private List<Likes> likes;
