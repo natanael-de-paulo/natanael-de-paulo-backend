@@ -32,9 +32,7 @@ public class PostServiceImpl implements IPostService {
         var profileId = UUID.fromString(profile_id);
         var post = Post.create(request, profileId);
         _postRepository.insert(post);
-
         var response = new PostResponse(post);
-
         return Optional.of(response);
     }
 
