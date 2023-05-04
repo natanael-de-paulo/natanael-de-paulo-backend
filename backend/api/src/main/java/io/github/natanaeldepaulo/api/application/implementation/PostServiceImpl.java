@@ -4,6 +4,7 @@ import io.github.natanaeldepaulo.api.application.IPostService;
 import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostResponse;
+import io.github.natanaeldepaulo.api.application.specification.UpdatePostRequest;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
@@ -50,6 +51,19 @@ public class PostServiceImpl implements IPostService {
         var response = new PostResponse(post);
         return Optional.of(response);
     }
+
+    @Override
+    public void updatePost(String postId, UpdatePostRequest dataToUpdate) throws Exception {
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+        if (!post.isPresent()) throw new Exception("Post not found!");
+
+        if(dataToUpdate.getTitle() != null) post.get().setTitle(dataToUpdate.getTitle().get());
+
+        if(dataToUpdate.getDescription() != null) post.get().setDescription(dataToUpdate.getDescription().get());
+
+        _postRepository.save(post.get());
+    }
+
 
     @Override
     public void saveCommentToList(Comment comment, String postId) {

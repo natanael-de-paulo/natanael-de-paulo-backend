@@ -3,6 +3,7 @@ package io.github.natanaeldepaulo.api.presentation.controllers;
 import io.github.natanaeldepaulo.api.application.IPostService;
 import io.github.natanaeldepaulo.api.application.specification.PostRequest;
 import io.github.natanaeldepaulo.api.application.specification.PostResponse;
+import io.github.natanaeldepaulo.api.application.specification.UpdatePostRequest;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -39,10 +40,10 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-//    @PutMapping("/{postId}")
-//    public ResponseEntity<String> updatePost(@PathVariable String postId, @RequestBody PostRequest request){
-//        postService.update(request, postId);
-//        return ResponseEntity.ok().body("successfully updated");
-//    }
+    @PutMapping("/{postId}")
+    public ResponseEntity<String> updatePost(@PathVariable String postId, @RequestBody UpdatePostRequest request) throws Exception {
+        postService.updatePost(postId, request);
+        return ResponseEntity.ok().body("successfully updated");
+    }
 
 }
