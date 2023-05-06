@@ -2,11 +2,13 @@ package io.github.natanaeldepaulo.api.infrastructure.mappers;
 
 import io.github.natanaeldepaulo.api.application.models.post.PostDTO;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
+import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 public class PostMapper implements IPostMapper{
     @Autowired
     private ModelMapper _modelMapper;
