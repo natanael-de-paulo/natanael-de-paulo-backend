@@ -1,35 +1,37 @@
-package io.github.natanaeldepaulo.api.application.implementation;
+package io.github.natanaeldepaulo.api.domain.services;
 
-import io.github.natanaeldepaulo.api.application.IPostService;
-import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
-import io.github.natanaeldepaulo.api.application.specification.PostRequest;
-import io.github.natanaeldepaulo.api.application.specification.PostResponse;
-import io.github.natanaeldepaulo.api.application.specification.UpdatePostRequest;
+import io.github.natanaeldepaulo.api.application.models.post.IPostService;
+import io.github.natanaeldepaulo.api.application.models.post.PostDTO;
+import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
+import io.github.natanaeldepaulo.api.application.models.post.UpdatePostRequest;
+import io.github.natanaeldepaulo.api.application.models.post.comment.CommentRequest;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
-import io.github.natanaeldepaulo.api.domain.interfaces.IPostRepository;
+import io.github.natanaeldepaulo.api.infrastructure.repositories.IPostRepository;
+import io.github.natanaeldepaulo.api.infrastructure.mappers.IPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class PostServiceImpl implements IPostService {
     @Autowired
     IPostRepository _postRepository;
+    @Autowired
+    IPostMapper _postMapper;
 
 
     @Override
-    public List<PostResponse> findPosts(String profileId){
+    public List<PostDTO> findPosts(String profileId){
         var data = _postRepository.findAll(ConvertFormatId.toUUID(profileId));
-        List<PostResponse> postList = new ArrayList<>();
+        List<PostDTO> postList = new ArrayList<>();
 
         for (Post post : data){
-            var responseData = new PostResponse(post);
+            var responseData = _postMapper.toDTO(post);
             postList.add(responseData);
         }
 
@@ -37,19 +39,17 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public Optional<PostResponse> findPostById(String postId){
+    public PostDTO findPostById(String postId){
         var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
-        var response = new PostResponse(post.get());
-        return Optional.of(response);
+        return _postMapper.toDTO(post.get());
     }
 
     @Override
-    public Optional<PostResponse> createPost(PostRequest request, String profile_id){
+    public PostDTO createPost(PostRequest request, String profile_id){
         var profileId = UUID.fromString(profile_id);
         var post = Post.create(request, profileId);
         _postRepository.insert(post);
-        var response = new PostResponse(post);
-        return Optional.of(response);
+        return _postMapper.toDTO(post);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package io.github.natanaeldepaulo.api.application.specification;
+package io.github.natanaeldepaulo.api.application.models.auth;
 
 import lombok.Data;
 @Data

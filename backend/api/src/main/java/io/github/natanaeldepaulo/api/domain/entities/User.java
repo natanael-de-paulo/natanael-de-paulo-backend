@@ -1,5 +1,6 @@
 package io.github.natanaeldepaulo.api.domain.entities;
 
+import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
 import io.github.natanaeldepaulo.api.domain.embedded.Profile;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -11,10 +12,12 @@ import java.util.UUID;
 @Getter
 public class User {
     @Id private UUID id;
-    @Setter private String name;
-    @Setter private String email;
-    @Setter private String password;
+    private String name;
+    private String email;
+    private String password;
     private Profile profile;
+
+    private User(){};
 
     private User(String name, String email, String password, Profile profile){
         this.id = UUID.randomUUID();
@@ -25,7 +28,12 @@ public class User {
     }
 
     //using factory method
-    public static User create(String name, String email, String password, Profile profile){
-        return new User(name, email, password, profile);
+    public static User create(UserDTO userDTO){
+        return new User(
+                userDTO.getName(),
+                userDTO.getEmail(),
+                userDTO.getPassword(),
+                userDTO.getProfile()
+        );
     }
 }

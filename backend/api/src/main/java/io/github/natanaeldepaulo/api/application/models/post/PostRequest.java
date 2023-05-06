@@ -1,9 +1,6 @@
-package io.github.natanaeldepaulo.api.application.specification;
+package io.github.natanaeldepaulo.api.application.models.post;
 
 import lombok.Data;
-
-import java.util.UUID;
-
 @Data
 public class PostRequest {
     private String title;

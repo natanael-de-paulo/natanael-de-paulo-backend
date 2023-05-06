@@ -1,8 +1,6 @@
-package io.github.natanaeldepaulo.api.application.specification;
+package io.github.natanaeldepaulo.api.application.models.post;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-
 import java.util.Optional;
 
 @Data

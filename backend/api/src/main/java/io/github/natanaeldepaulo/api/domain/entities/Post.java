@@ -1,6 +1,6 @@
 package io.github.natanaeldepaulo.api.domain.entities;
 
-import io.github.natanaeldepaulo.api.application.specification.PostRequest;
+import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.embedded.Likes;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Document(collection = "posts")

@@ -1,9 +1,9 @@
-package io.github.natanaeldepaulo.api.application.implementation;
+package io.github.natanaeldepaulo.api.domain.services;
 
-import io.github.natanaeldepaulo.api.application.ICommentService;
-import io.github.natanaeldepaulo.api.application.IPostService;
-import io.github.natanaeldepaulo.api.application.specification.CommentRequest;
-import io.github.natanaeldepaulo.api.application.specification.CommentResponse;
+import io.github.natanaeldepaulo.api.application.models.post.IPostService;
+import io.github.natanaeldepaulo.api.application.models.post.comment.CommentDTO;
+import io.github.natanaeldepaulo.api.application.models.post.comment.CommentRequest;
+import io.github.natanaeldepaulo.api.application.models.post.comment.ICommentService;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +18,15 @@ public class CommentServiceImpl implements ICommentService {
     private IPostService postService;
 
     @Override
-    public CommentResponse findById(String postId, String commentId){
+    public CommentDTO findById(String postId, String commentId){
         var _commentId = ConvertFormatId.toUUID(commentId);
-        List<Comment> comments = postService.findPostById(postId).get().getComments();
+        List<Comment> comments = postService.findPostById(postId).getComments();
         var comment = comments.stream().filter(c -> c.getId().equals(_commentId)).findFirst();
-        return new CommentResponse(comment.get());
+        return new CommentDTO(comment.get());
     }
 
     @Override
-    public CommentResponse create(CommentRequest request, String postId, String profileId){
+    public CommentDTO create(CommentRequest request, String postId, String profileId){
         var comment = Comment.create(
                 request.description,
                 ConvertFormatId.toUUID(postId) ,
@@ -34,7 +34,7 @@ public class CommentServiceImpl implements ICommentService {
         );
 
         postService.saveCommentToList(comment, comment.getPost_id().toString());
-        return new CommentResponse(comment);
+        return new CommentDTO(comment);
     }
 
     @Override
