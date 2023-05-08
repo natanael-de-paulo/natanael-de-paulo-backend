@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
-@Getter
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile {
     @Id private UUID id;
@@ -14,7 +14,7 @@ public class Profile {
     private Boolean image = false;
     private String imageURL;
 
-    public Profile(){}
+    private Profile(){}
 
     private Profile(Profile profile){
         this.id = UUID.randomUUID();
