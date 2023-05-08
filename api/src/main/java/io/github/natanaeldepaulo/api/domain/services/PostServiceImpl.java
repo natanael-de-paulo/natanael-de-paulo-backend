@@ -6,11 +6,14 @@ import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
 import io.github.natanaeldepaulo.api.application.models.post.UpdatePostRequest;
 import io.github.natanaeldepaulo.api.application.models.post.comment.CommentRequest;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
+import io.github.natanaeldepaulo.api.domain.IUploadService;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
+import io.github.natanaeldepaulo.api.domain.entities.User;
 import io.github.natanaeldepaulo.api.infrastructure.repositories.IPostRepository;
 import io.github.natanaeldepaulo.api.infrastructure.mappers.IPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +24,9 @@ import java.util.UUID;
 public class PostServiceImpl implements IPostService {
     @Autowired
     IPostRepository _postRepository;
+
+    @Autowired
+    IUploadService _uploadService;
     @Autowired
     IPostMapper _postMapper;
 
@@ -45,9 +51,17 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public PostDTO createPost(PostRequest request, String profile_id){
-        var profileId = UUID.fromString(profile_id);
-        var post = Post.create(request, profileId);
+    public PostDTO createPost(PostRequest request, String profileId) {
+        String imageUrl = null;
+        if (request.getFile() != null) imageUrl = _uploadService.upload(request.getFile());
+
+        var post = Post.create(
+                request.getTitle(),
+                request.getDescription(),
+                request.getFile() != null ? true: null,
+                request.getFile() != null ? imageUrl : null,
+                ConvertFormatId.toUUID(profileId));
+
         _postRepository.insert(post);
         return _postMapper.toDTO(post);
     }

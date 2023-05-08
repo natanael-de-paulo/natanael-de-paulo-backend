@@ -53,11 +53,9 @@ public final class UserServiceImpl implements IUserService {
     @Override
     public String upload(MultipartFile file){
         var user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        var fileName = user.getId() + "." + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-        var imagePath = _uploadService.upload(file, fileName);
+        var imagePath = _uploadService.upload(file);
         user.getProfile().setImageURL(imagePath);
         user.getProfile().setImage(true);
-
         _userRepository.save(user);
         return imagePath;
     }

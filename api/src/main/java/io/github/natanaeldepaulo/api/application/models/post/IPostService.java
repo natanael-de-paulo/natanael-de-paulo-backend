@@ -8,7 +8,7 @@ import java.util.List;
 public interface IPostService {
     List<PostDTO> findPosts(String profileId);
     PostDTO findPostById(String post_id);
-    PostDTO createPost(PostRequest post, String profile_id);
+    PostDTO createPost(PostRequest post, String profileId);
     void updatePost(String postId, UpdatePostRequest dataToUpdate) throws Exception;
     void deletePost(String postId) throws Exception;
     void saveCommentToList(Comment comment, String postId);

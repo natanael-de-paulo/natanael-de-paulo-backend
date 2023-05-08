@@ -23,24 +23,19 @@ public class Post {
     private List<Comment> comments;
     private List<Likes> likes;
 
-    private Post(String title, String description, Boolean image, String imageUrl, UUID profile_id){
+    private Post(String title, String description, Boolean image, String imageUrl, UUID profileId){
         this.id = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.image = image;
         this.imageUrl = imageUrl;
-        this.profile_id = profile_id;
+        this.profile_id = profileId;
         this.comments = new ArrayList<>();
         this.likes = new ArrayList<>();
     }
 
-    public static Post create(PostRequest post, UUID profile_id){
-        return new Post(
-            post.getTitle(),
-            post.getDescription(),
-            post.getImage(), post.getImageUrl(),
-            profile_id
-        );
+    public static Post create(String title, String description, Boolean image, String imageUrl, UUID profileId){
+        return new Post(title, description, image, imageUrl, profileId);
     }
 
     public void setDescription(String description) {

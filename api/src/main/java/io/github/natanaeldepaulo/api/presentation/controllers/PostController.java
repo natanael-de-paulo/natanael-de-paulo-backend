@@ -5,14 +5,16 @@ import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
 import io.github.natanaeldepaulo.api.application.models.post.PostDTO;
 import io.github.natanaeldepaulo.api.application.models.post.UpdatePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/posts/")
+@RequestMapping("/api/v1/posts")
 public class PostController {
     @Autowired
     private IPostService postService;
@@ -31,8 +33,11 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PostDTO> createPost(@RequestBody PostRequest request, @RequestParam String profile_id){
-        var response = postService.createPost(request, profile_id);
+    public ResponseEntity<PostDTO> createPost(PostRequest postRequest, @RequestParam String profileId, @RequestPart(required = false, name = "file") MultipartFile file) {
+        if (file != null) {
+            postRequest.setFile(file);
+        }
+        var response = postService.createPost(postRequest, profileId);
         return ResponseEntity.ok(response);
     }
 
