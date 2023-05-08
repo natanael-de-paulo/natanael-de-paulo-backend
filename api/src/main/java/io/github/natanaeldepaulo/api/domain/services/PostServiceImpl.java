@@ -10,6 +10,7 @@ import io.github.natanaeldepaulo.api.domain.IUploadService;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import io.github.natanaeldepaulo.api.domain.entities.User;
+import io.github.natanaeldepaulo.api.infrastructure.providers.IEventProvider;
 import io.github.natanaeldepaulo.api.infrastructure.repositories.IPostRepository;
 import io.github.natanaeldepaulo.api.infrastructure.mappers.IPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ import java.util.UUID;
 public class PostServiceImpl implements IPostService {
     @Autowired
     IPostRepository _postRepository;
-
+    @Autowired
+    private IEventProvider _eventService;
     @Autowired
     IUploadService _uploadService;
     @Autowired
@@ -63,6 +65,7 @@ public class PostServiceImpl implements IPostService {
                 ConvertFormatId.toUUID(profileId));
 
         _postRepository.insert(post);
+        _eventService.send("post-created", post.getId().toString());
         return _postMapper.toDTO(post);
     }
 

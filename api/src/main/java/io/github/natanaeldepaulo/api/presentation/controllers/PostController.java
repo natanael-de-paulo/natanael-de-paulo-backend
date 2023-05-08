@@ -33,7 +33,7 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PostDTO> createPost(PostRequest postRequest, @RequestParam String profileId, @RequestPart(required = false, name = "file") MultipartFile file) {
+    public ResponseEntity<PostDTO> createPost(PostRequest postRequest, @RequestParam String profileId, @RequestPart(required = false) MultipartFile file) {
         if (file != null) {
             postRequest.setFile(file);
         }
