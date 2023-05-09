@@ -6,20 +6,17 @@ import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
 import io.github.natanaeldepaulo.api.application.models.post.UpdatePostRequest;
 import io.github.natanaeldepaulo.api.application.models.post.comment.CommentRequest;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
-import io.github.natanaeldepaulo.api.domain.IUploadService;
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IUploadService;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
-import io.github.natanaeldepaulo.api.domain.entities.User;
-import io.github.natanaeldepaulo.api.infrastructure.providers.IEventProvider;
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IEventProvider;
 import io.github.natanaeldepaulo.api.infrastructure.repositories.IPostRepository;
-import io.github.natanaeldepaulo.api.infrastructure.mappers.IPostMapper;
+import io.github.natanaeldepaulo.api.application.models.post.IPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PostServiceImpl implements IPostService {

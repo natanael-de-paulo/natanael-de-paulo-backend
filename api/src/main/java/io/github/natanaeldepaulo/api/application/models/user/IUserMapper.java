@@ -1,4 +1,4 @@
-package io.github.natanaeldepaulo.api.infrastructure.mappers;
+package io.github.natanaeldepaulo.api.application.models.user;
 
 import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
 import io.github.natanaeldepaulo.api.domain.entities.User;

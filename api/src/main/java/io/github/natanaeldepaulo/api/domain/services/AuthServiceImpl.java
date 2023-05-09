@@ -1,6 +1,5 @@
 package io.github.natanaeldepaulo.api.domain.services;
 
-import io.github.natanaeldepaulo.api.infrastructure.providers.ITokenProvider;
 import io.github.natanaeldepaulo.api.application.models.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,8 @@
-package io.github.natanaeldepaulo.api.domain;
+package io.github.natanaeldepaulo.api.domain.services;
 
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IUploadService;
 import io.github.natanaeldepaulo.api.domain.entities.User;
-import io.github.natanaeldepaulo.api.infrastructure.providers.IAwsProvider;
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IAwsProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

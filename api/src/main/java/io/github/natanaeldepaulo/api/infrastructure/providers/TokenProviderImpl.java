@@ -1,5 +1,6 @@
 package io.github.natanaeldepaulo.api.infrastructure.providers;
 
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.ITokenProvider;
 import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.jsonwebtoken.Claims;

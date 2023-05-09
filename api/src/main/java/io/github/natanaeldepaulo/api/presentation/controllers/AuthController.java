@@ -1,12 +1,10 @@
 package io.github.natanaeldepaulo.api.presentation.controllers;
 
-import io.github.natanaeldepaulo.api.application.models.auth.IAuthService;
 import io.github.natanaeldepaulo.api.application.models.auth.AuthRequest;
 import io.github.natanaeldepaulo.api.application.models.auth.AuthDTO;
-import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
 import io.github.natanaeldepaulo.api.domain.entities.User;
-import io.github.natanaeldepaulo.api.infrastructure.mappers.IUserMapper;
-import io.github.natanaeldepaulo.api.infrastructure.providers.ITokenProvider;
+import io.github.natanaeldepaulo.api.application.models.user.IUserMapper;
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.ITokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

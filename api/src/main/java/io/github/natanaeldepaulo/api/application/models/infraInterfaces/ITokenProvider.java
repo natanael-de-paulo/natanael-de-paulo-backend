@@ -1,4 +1,4 @@
-package io.github.natanaeldepaulo.api.infrastructure.providers;
+package io.github.natanaeldepaulo.api.application.models.infraInterfaces;
 
 import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
 import io.jsonwebtoken.Claims;

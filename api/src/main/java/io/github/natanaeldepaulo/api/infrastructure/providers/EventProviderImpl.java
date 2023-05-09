@@ -1,5 +1,6 @@
 package io.github.natanaeldepaulo.api.infrastructure.providers;
 
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IEventProvider;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

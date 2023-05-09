@@ -1,5 +1,6 @@
 package io.github.natanaeldepaulo.api.infrastructure.mappers;
 
+import io.github.natanaeldepaulo.api.application.models.user.IUserMapper;
 import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
 import io.github.natanaeldepaulo.api.domain.entities.User;
 import lombok.NoArgsConstructor;

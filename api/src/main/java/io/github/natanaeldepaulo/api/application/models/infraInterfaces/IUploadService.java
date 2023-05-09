@@ -1,4 +1,4 @@
-package io.github.natanaeldepaulo.api.domain;
+package io.github.natanaeldepaulo.api.application.models.infraInterfaces;
 
 import org.springframework.web.multipart.MultipartFile;
 

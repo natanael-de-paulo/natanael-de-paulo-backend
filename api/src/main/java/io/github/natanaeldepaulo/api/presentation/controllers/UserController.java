@@ -29,7 +29,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/upload")
+    @PostMapping("/infraInterfaces")
     public ResponseEntity<String> upload(@RequestParam(required = false) MultipartFile file){
         var response = _userService.upload(file);
         return ResponseEntity.ok(response);

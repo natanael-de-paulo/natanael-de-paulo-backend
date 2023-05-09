@@ -1,7 +1,6 @@
 package io.github.natanaeldepaulo.api.infrastructure.config;
 
-import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
-import io.github.natanaeldepaulo.api.infrastructure.providers.ITokenProvider;
+import io.github.natanaeldepaulo.api.application.models.infraInterfaces.ITokenProvider;
 import io.github.natanaeldepaulo.api.infrastructure.repositories.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
