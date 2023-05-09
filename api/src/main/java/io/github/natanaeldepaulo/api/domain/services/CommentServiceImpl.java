@@ -19,9 +19,8 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public CommentDTO findById(String postId, String commentId){
-        var _commentId = ConvertFormatId.toUUID(commentId);
         List<Comment> comments = postService.findPostById(postId).getComments();
-        var comment = comments.stream().filter(c -> c.getId().equals(_commentId)).findFirst();
+        var comment = comments.stream().filter(c -> c.getId().equals(ConvertFormatId.toUUID(commentId))).findFirst();
         return new CommentDTO(comment.get());
     }
 
