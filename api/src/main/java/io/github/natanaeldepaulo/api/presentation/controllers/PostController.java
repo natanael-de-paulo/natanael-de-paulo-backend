@@ -17,18 +17,17 @@ import java.util.List;
 @RequestMapping("/api/v1/posts")
 public class PostController {
     @Autowired
-    private IPostService postService;
+    private IPostService _postService;
 
     @GetMapping
     public  ResponseEntity<List<PostDTO>> getPosts(@RequestParam String profileId){
-        var response = postService.findPosts(profileId);
+        var response = _postService.findPosts(profileId);
         return ResponseEntity.ok().body(response);
     }
 
-
     @GetMapping("/{postId}")
     public ResponseEntity<PostDTO> getPostById(@PathVariable String postId){
-        var response = postService.findPostById(postId);
+        var response = _postService.findPostById(postId);
         return ResponseEntity.ok(response);
     }
 
@@ -37,20 +36,26 @@ public class PostController {
         if (file != null) {
             postRequest.setFile(file);
         }
-        var response = postService.createPost(postRequest, profileId);
+        var response = _postService.createPost(postRequest, profileId);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<String> updatePost(@PathVariable String postId, @RequestBody UpdatePostRequest request) throws Exception {
-        postService.updatePost(postId, request);
+        _postService.updatePost(postId, request);
         return ResponseEntity.ok().body("successfully updated");
     }
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> deletePost(@PathVariable String postId) throws Exception {
-        postService.deletePost(postId);
+        _postService.deletePost(postId);
         return ResponseEntity.ok().body("successfully deleted");
+    }
+
+    @PostMapping("/{postId}/like")
+    public ResponseEntity<String> likePost(@PathVariable String postId, @RequestParam String profileId){
+        var response = _postService.likePost(postId, profileId);
+        return ResponseEntity.ok(response);
     }
 
 }

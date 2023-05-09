@@ -15,7 +15,7 @@ public class Comment {
     private UUID post_id;
     private UUID profile_id;
     private List<Likes> likes;
-    public Comment(){}
+    private Comment(){}
 
     private Comment(String description, UUID postId, UUID profileId){
         this.id = UUID.randomUUID();

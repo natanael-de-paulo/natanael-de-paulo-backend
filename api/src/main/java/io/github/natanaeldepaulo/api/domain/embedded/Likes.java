@@ -1,8 +1,14 @@
 package io.github.natanaeldepaulo.api.domain.embedded;
 
+import lombok.Data;
+
+import java.util.UUID;
+
+@Data
 public class Likes {
-    private Profile profile;
-    public Likes(Profile profile) {
-        this.profile = profile;
+    private UUID profile_id;
+    public Likes(){}
+    public Likes(UUID profileId) {
+        this.profile_id = profileId;
     }
 }

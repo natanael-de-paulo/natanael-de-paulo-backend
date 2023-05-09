@@ -8,6 +8,7 @@ import io.github.natanaeldepaulo.api.application.models.post.comment.CommentRequ
 import io.github.natanaeldepaulo.api.application.utils.ConvertFormatId;
 import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IUploadService;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
+import io.github.natanaeldepaulo.api.domain.embedded.Likes;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import io.github.natanaeldepaulo.api.application.models.infraInterfaces.IEventProvider;
 import io.github.natanaeldepaulo.api.infrastructure.repositories.IPostRepository;
@@ -85,6 +86,21 @@ public class PostServiceImpl implements IPostService {
         _postRepository.delete(post.get());
     }
 
+    @Override
+    public String likePost(String postId, String profileId){
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+        var like = new Likes(ConvertFormatId.toUUID(profileId));
+
+        if (post.get().getLikes().contains(like)) {
+            post.get().getLikes().remove(like);
+            _postRepository.save(post.get());
+            return "like removed!";
+        } else {
+            post.get().getLikes().add(like);
+            _postRepository.save(post.get());
+            return "like added!";
+        }
+    }
 
     @Override
     public void saveCommentToList(Comment comment, String postId) {
@@ -121,14 +137,4 @@ public class PostServiceImpl implements IPostService {
         post.get().getComments().remove(comment.get());
         _postRepository.save(post.get());
     }
-
-
-//    @Override
-//    public void update(PostRequest dataToUpdate, String postId){
-//       var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
-//       post.get().setTitle(dataToUpdate.getTitle());
-//       post.get().setTitle(dataToUpdate.getDescription());
-//
-//       _postRepository.save(post.get());
-//    }
 }

@@ -31,8 +31,9 @@ public class SecurityConfig {
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/auth")
                     .permitAll()
-                    .anyRequest().authenticated()
-                    .and().addFilterBefore(filterToken, UsernamePasswordAuthenticationFilter.class)
+                    .anyRequest()
+                    .permitAll()
+                    .and()
                     .build();
     }
 
