@@ -15,11 +15,11 @@ import java.util.List;
 public class CommentServiceImpl implements ICommentService {
 
     @Autowired
-    private IPostService postService;
+    private IPostService _postService;
 
     @Override
     public CommentDTO findById(String postId, String commentId){
-        List<Comment> comments = postService.findPostById(postId).getComments();
+        List<Comment> comments = _postService.findPostById(postId).getComments();
         var comment = comments.stream().filter(c -> c.getId().equals(ConvertFormatId.toUUID(commentId))).findFirst();
         return new CommentDTO(comment.get());
     }
@@ -32,14 +32,25 @@ public class CommentServiceImpl implements ICommentService {
                 ConvertFormatId.toUUID(profileId)
         );
 
-        postService.saveCommentToList(comment, comment.getPost_id().toString());
+        _postService.saveCommentToList(comment, comment.getPost_id().toString());
         return new CommentDTO(comment);
     }
 
     @Override
+    public String likeAndUnlikeComment(String postId, String commentId, String profileId){
+        try {
+            var response = _postService.likeAndUnlikeCommentToPost(postId, commentId, profileId);
+            return response;
+        } catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
+    @Override
     public String updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate){
         try {
-            postService.updateCommentToPost(postId, commentId, dataToUpdate);
+            _postService.updateCommentToPost(postId, commentId, dataToUpdate);
             return "Updated comment";
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -49,7 +60,7 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public String deleteCommentToPost(String postId, String commentId){
         try {
-            postService.deleteCommentToPost(postId, commentId);
+            _postService.deleteCommentToPost(postId, commentId);
             return "Deleted comment";
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());

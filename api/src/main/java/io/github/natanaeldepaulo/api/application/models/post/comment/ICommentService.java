@@ -5,4 +5,5 @@ public interface ICommentService {
     CommentDTO findById(String postId, String commentId);
     String updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate);
     String deleteCommentToPost(String postId, String commentId);
+    String likeAndUnlikeComment(String postId, String commentId, String profileId);
 }

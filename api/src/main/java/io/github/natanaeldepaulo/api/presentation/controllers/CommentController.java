@@ -13,30 +13,36 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/post/{postId}/comment")
 public class CommentController {
     @Autowired
-    private ICommentService commentService;
+    private ICommentService _commentService;
 
     @GetMapping("/{commentId}")
     public ResponseEntity<CommentDTO> findById(@PathVariable String postId, @PathVariable String commentId){
-        var response = commentService.findById(postId, commentId);
+        var response = _commentService.findById(postId, commentId);
         return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/create")
     public ResponseEntity<CommentDTO> createComment(@PathVariable String postId, @RequestParam String profileId, @RequestBody CommentRequest request){
-        var response = commentService.create(request, postId, profileId);
+        var response = _commentService.create(request, postId, profileId);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{commentId}")
     public  ResponseEntity<String> updateComment(@PathVariable String postId, @PathVariable String commentId, @RequestBody CommentRequest dataToUpdate){
-        var response = commentService.updateCommentToPost(postId, commentId, dataToUpdate);
+        var response = _commentService.updateCommentToPost(postId, commentId, dataToUpdate);
         return ResponseEntity.ok().body(response);
     }
 
     @DeleteMapping("/{commentId}")
     public  ResponseEntity<String> deleteComment(@PathVariable String postId, @PathVariable String commentId){
-        var response = commentService.deleteCommentToPost(postId, commentId);
+        var response = _commentService.deleteCommentToPost(postId, commentId);
         return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping("/{commentId}/like")
+    public ResponseEntity<String> likePost(@PathVariable String postId, @PathVariable String commentId, @RequestParam String profileId){
+        var response = _commentService.likeAndUnlikeComment(postId, commentId, profileId);
+        return ResponseEntity.ok(response);
     }
 
 }

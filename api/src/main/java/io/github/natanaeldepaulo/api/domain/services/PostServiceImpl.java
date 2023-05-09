@@ -103,6 +103,25 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
+    public String likeAndUnlikeCommentToPost(String postId, String commentId, String profileId) {
+        var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
+        var like = new Likes(ConvertFormatId.toUUID(profileId));
+        var comment = post.get().getComments().stream()
+                .filter(c -> c.getId().equals(ConvertFormatId.toUUID(commentId)))
+                .findFirst();
+
+        if (comment != null && comment.get().getLikes().contains(like)) {
+            comment.get().getLikes().remove(like);
+            _postRepository.save(post.get());
+            return "like removed!";
+        } else {
+            comment.get().getLikes().add(like);
+            _postRepository.save(post.get());
+            return "like added!";
+        }
+    }
+
+    @Override
     public void saveCommentToList(Comment comment, String postId) {
         var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
         post.get().getComments().add(comment);

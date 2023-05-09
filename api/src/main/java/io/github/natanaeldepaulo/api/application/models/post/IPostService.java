@@ -7,11 +7,12 @@ import java.util.List;
 
 public interface IPostService {
     List<PostDTO> findPosts(String profileId);
-    PostDTO findPostById(String post_id);
+    PostDTO findPostById(String postId);
     PostDTO createPost(PostRequest post, String profileId);
     void updatePost(String postId, UpdatePostRequest dataToUpdate) throws Exception;
     void deletePost(String postId) throws Exception;
     String likePost(String postId, String profileId);
+    String likeAndUnlikeCommentToPost(String postId, String commentId, String profileId);
     void saveCommentToList(Comment comment, String postId);
     void updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate) throws Exception;
     void deleteCommentToPost(String postId, String commentId) throws Exception;
