@@ -32,8 +32,8 @@ public class PostServiceImpl implements IPostService {
 
 
     @Override
-    public List<PostDTO> findPosts(String profileId){
-        var data = _postRepository.findAll(ConvertFormatId.toUUID(profileId));
+    public List<PostDTO> findPosts(String userId){
+        var data = _postRepository.findAll(ConvertFormatId.toUUID(userId));
         List<PostDTO> postList = new ArrayList<>();
 
         for (Post post : data){
@@ -51,16 +51,16 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public PostDTO createPost(PostRequest request, String profileId) {
+    public PostDTO createPost(PostRequest request, String userId) {
         String imageUrl = null;
         if (request.getFile() != null) imageUrl = _uploadService.upload(request.getFile());
 
         var post = Post.create(
                 request.getTitle(),
                 request.getDescription(),
-                request.getFile() != null ? true: null,
+                request.getFile() != null ? true : false,
                 request.getFile() != null ? imageUrl : null,
-                ConvertFormatId.toUUID(profileId));
+                ConvertFormatId.toUUID(userId));
 
         _postRepository.insert(post);
         _eventService.send("post-created", post.getId().toString());
@@ -87,9 +87,9 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public String likePost(String postId, String profileId){
+    public String likePost(String postId, String userId){
         var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
-        var like = new Likes(ConvertFormatId.toUUID(profileId));
+        var like = new Likes(ConvertFormatId.toUUID(userId));
 
         if (post.get().getLikes().contains(like)) {
             post.get().getLikes().remove(like);
@@ -103,9 +103,9 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public String likeAndUnlikeCommentToPost(String postId, String commentId, String profileId) {
+    public String likeAndUnlikeCommentToPost(String postId, String commentId, String userId) {
         var post = _postRepository.findById(ConvertFormatId.toUUID(postId));
-        var like = new Likes(ConvertFormatId.toUUID(profileId));
+        var like = new Likes(ConvertFormatId.toUUID(userId));
         var comment = post.get().getComments().stream()
                 .filter(c -> c.getId().equals(ConvertFormatId.toUUID(commentId)))
                 .findFirst();

@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IPostRepository extends MongoRepository<Post, UUID> {
-    @Query("{profile_id: ?0}")
-    List<Post> findAll(UUID profile_id);
+    @Query("{user_id: ?0}")
+    List<Post> findAll(UUID user_id);
 }

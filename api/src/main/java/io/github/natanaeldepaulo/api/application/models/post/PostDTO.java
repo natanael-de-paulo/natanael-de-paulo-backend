@@ -18,7 +18,7 @@ public class PostDTO {
     private String description;
     private Boolean image = false;
     private String imageUrl;
-    private UUID profile_id;
+    private UUID user_id;;
     private List<Comment> comments;
     private List<Likes> likes;
 }

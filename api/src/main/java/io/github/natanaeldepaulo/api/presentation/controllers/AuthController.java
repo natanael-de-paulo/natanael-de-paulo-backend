@@ -28,7 +28,7 @@ public class AuthController {
     public ResponseEntity<AuthDTO> auth(@RequestBody AuthRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(
-                        request.getEmail(), request.getPassword()
+                request.getEmail(), request.getPassword()
         );
 
         Authentication authenticate = this._authenticationManager.authenticate(usernamePasswordAuthenticationToken);

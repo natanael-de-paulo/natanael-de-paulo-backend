@@ -1,9 +1,7 @@
 package io.github.natanaeldepaulo.api.application.models.post;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.core.annotation.AliasFor;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data

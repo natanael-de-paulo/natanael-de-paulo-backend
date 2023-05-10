@@ -10,38 +10,38 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/post/{postId}/comment")
+@RequestMapping("/api/v1/posts/comments")
 public class CommentController {
     @Autowired
     private ICommentService _commentService;
 
-    @GetMapping("/{commentId}")
-    public ResponseEntity<CommentDTO> findById(@PathVariable String postId, @PathVariable String commentId){
+    @GetMapping
+    public ResponseEntity<CommentDTO> findById(@RequestParam String postId, @RequestParam String commentId){
         var response = _commentService.findById(postId, commentId);
         return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CommentDTO> createComment(@PathVariable String postId, @RequestParam String profileId, @RequestBody CommentRequest request){
-        var response = _commentService.create(request, postId, profileId);
+    public ResponseEntity<CommentDTO> createComment(@RequestParam String postId, @RequestParam String userId, @RequestBody CommentRequest request){
+        var response = _commentService.create(postId, userId, request);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{commentId}")
-    public  ResponseEntity<String> updateComment(@PathVariable String postId, @PathVariable String commentId, @RequestBody CommentRequest dataToUpdate){
+    @PutMapping("/update")
+    public  ResponseEntity<String> updateComment(@RequestParam String postId, @RequestParam String commentId, @RequestBody CommentRequest dataToUpdate){
         var response = _commentService.updateCommentToPost(postId, commentId, dataToUpdate);
         return ResponseEntity.ok().body(response);
     }
 
-    @DeleteMapping("/{commentId}")
-    public  ResponseEntity<String> deleteComment(@PathVariable String postId, @PathVariable String commentId){
+    @DeleteMapping("/delete")
+    public  ResponseEntity<String> deleteComment(@RequestParam String postId, @RequestParam String commentId){
         var response = _commentService.deleteCommentToPost(postId, commentId);
         return ResponseEntity.ok().body(response);
     }
 
-    @PostMapping("/{commentId}/like")
-    public ResponseEntity<String> likePost(@PathVariable String postId, @PathVariable String commentId, @RequestParam String profileId){
-        var response = _commentService.likeAndUnlikeComment(postId, commentId, profileId);
+    @PostMapping("/like")
+    public ResponseEntity<String> likeComment(@RequestParam String postId, @RequestParam String commentId, @RequestParam String userId){
+        var response = _commentService.likeAndUnlikeComment(postId, commentId, userId);
         return ResponseEntity.ok(response);
     }
 

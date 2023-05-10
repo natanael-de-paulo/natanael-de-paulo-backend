@@ -13,14 +13,14 @@ public class CommentDTO {
     private UUID id;
     private String description;
     private UUID post_id;
-    private UUID profile_id;
+    private UUID user_id;
     private List<Likes> likes;
 
     public CommentDTO(Comment params) {
         this.id = params.getId();
         this.description = params.getDescription();
         this.post_id = params.getPost_id();
-        this.profile_id = params.getProfile_id();
+        this.user_id = params.getUser_id();
         this.likes = params.getLikes();
     }
 }

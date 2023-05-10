@@ -13,15 +13,15 @@ public class Comment {
     @Id private UUID id;
     @Setter private String description;
     private UUID post_id;
-    private UUID profile_id;
+    private UUID user_id;
     private List<Likes> likes;
     private Comment(){}
 
-    private Comment(String description, UUID postId, UUID profileId){
+    private Comment(String description, UUID postId, UUID userId){
         this.id = UUID.randomUUID();
         this.description = description;
         this.post_id = postId;
-        this.profile_id = profileId;
+        this.user_id = userId;
         this.likes = new ArrayList<>();
     }
 

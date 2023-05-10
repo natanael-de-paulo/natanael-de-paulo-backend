@@ -5,7 +5,6 @@ import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
 import io.github.natanaeldepaulo.api.application.models.post.PostDTO;
 import io.github.natanaeldepaulo.api.application.models.post.UpdatePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,8 +19,8 @@ public class PostController {
     private IPostService _postService;
 
     @GetMapping
-    public  ResponseEntity<List<PostDTO>> getPosts(@RequestParam String profileId){
-        var response = _postService.findPosts(profileId);
+    public  ResponseEntity<List<PostDTO>> getPosts(@RequestParam String userId){
+        var response = _postService.findPosts(userId);
         return ResponseEntity.ok().body(response);
     }
 
@@ -32,11 +31,11 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PostDTO> createPost(PostRequest postRequest, @RequestParam String profileId, @RequestPart(required = false) MultipartFile file) {
+    public ResponseEntity<PostDTO> createPost(PostRequest postRequest, @RequestParam String userId, @RequestPart(required = false) MultipartFile file) {
         if (file != null) {
             postRequest.setFile(file);
         }
-        var response = _postService.createPost(postRequest, profileId);
+        var response = _postService.createPost(postRequest, userId);
         return ResponseEntity.ok(response);
     }
 
@@ -52,9 +51,9 @@ public class PostController {
         return ResponseEntity.ok().body("successfully deleted");
     }
 
-    @PostMapping("/{postId}/like")
-    public ResponseEntity<String> likePost(@PathVariable String postId, @RequestParam String profileId){
-        var response = _postService.likePost(postId, profileId);
+    @PostMapping("/like")
+    public ResponseEntity<String> likePost(@RequestParam String postId, @RequestParam String userId){
+        var response = _postService.likePost(postId, userId);
         return ResponseEntity.ok(response);
     }
 

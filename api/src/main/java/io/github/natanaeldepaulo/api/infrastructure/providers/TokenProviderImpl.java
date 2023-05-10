@@ -24,7 +24,6 @@ public class TokenProviderImpl implements ITokenProvider {
         return Jwts
                 .builder()
                 .setSubject(user.getEmail())
-                .claim("profileId",ConvertFormatId.toString(user.getProfile().getId()))
                 .claim("userId", ConvertFormatId.toString(user.getId()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 7200000))

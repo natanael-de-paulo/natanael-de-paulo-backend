@@ -1,10 +1,8 @@
 package io.github.natanaeldepaulo.api.domain.entities;
 
-import io.github.natanaeldepaulo.api.application.models.post.PostRequest;
 import io.github.natanaeldepaulo.api.domain.embedded.Comment;
 import io.github.natanaeldepaulo.api.domain.embedded.Likes;
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,24 +18,24 @@ public class Post {
     private String description;
     private Boolean image = false;
     private String imageUrl;
-    private UUID profile_id;;
+    private UUID user_id;
     private List<Comment> comments;
     private List<Likes> likes;
 
     private Post(){}
 
-    private Post(String title, String description, Boolean image, String imageUrl, UUID profileId){
+    private Post(String title, String description, Boolean image, String imageUrl, UUID userId){
         this.id = UUID.randomUUID();
         this.title = title;
         this.description = description;
         this.image = image;
         this.imageUrl = imageUrl;
-        this.profile_id = profileId;
+        this.user_id = userId;
         this.comments = new ArrayList<>();
         this.likes = new ArrayList<>();
     }
 
-    public static Post create(String title, String description, Boolean image, String imageUrl, UUID profileId){
-        return new Post(title, description, image, imageUrl, profileId);
+    public static Post create(String title, String description, Boolean image, String imageUrl, UUID userId){
+        return new Post(title, description, image, imageUrl, userId);
     }
 }

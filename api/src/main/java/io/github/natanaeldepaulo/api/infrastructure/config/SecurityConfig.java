@@ -22,19 +22,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-            return http.csrf()
-                    .disable()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and().authorizeHttpRequests()
-                    .requestMatchers(HttpMethod.POST, "/api/v1/user/create")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/v1/auth")
-                    .permitAll()
-                    .anyRequest()
-                    .permitAll()
-                    .and()
-                    .build();
+        return http.csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST, "/api/v1/user/create")
+                .permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/auth")
+                .permitAll()
+                .anyRequest()
+                .permitAll()
+                .and()
+                .build();
     }
 
     @Bean

@@ -6,9 +6,9 @@ import java.util.UUID;
 
 @Data
 public class Likes {
-    private UUID profile_id;
+    private UUID user_id;
     public Likes(){}
-    public Likes(UUID profileId) {
-        this.profile_id = profileId;
+    public Likes(UUID userId) {
+        this.user_id = userId;
     }
 }

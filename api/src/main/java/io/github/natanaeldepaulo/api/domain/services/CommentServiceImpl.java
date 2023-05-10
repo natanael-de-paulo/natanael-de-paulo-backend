@@ -25,11 +25,11 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public CommentDTO create(CommentRequest request, String postId, String profileId){
+    public CommentDTO create(String postId, String userId, CommentRequest request){
         var comment = Comment.create(
                 request.description,
                 ConvertFormatId.toUUID(postId) ,
-                ConvertFormatId.toUUID(profileId)
+                ConvertFormatId.toUUID(userId)
         );
 
         _postService.saveCommentToList(comment, comment.getPost_id().toString());
@@ -37,9 +37,9 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public String likeAndUnlikeComment(String postId, String commentId, String profileId){
+    public String likeAndUnlikeComment(String postId, String commentId, String userId){
         try {
-            var response = _postService.likeAndUnlikeCommentToPost(postId, commentId, profileId);
+            var response = _postService.likeAndUnlikeCommentToPost(postId, commentId, userId);
             return response;
         } catch (Exception e){
             throw new RuntimeException(e.getMessage());

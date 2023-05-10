@@ -2,6 +2,7 @@ package io.github.natanaeldepaulo.api.presentation.controllers;
 
 import io.github.natanaeldepaulo.api.application.models.user.IUserService;
 import io.github.natanaeldepaulo.api.application.models.user.UserDTO;
+import io.github.natanaeldepaulo.api.application.models.user.UserRequest;
 import io.github.natanaeldepaulo.api.domain.entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,15 +24,20 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createUser(@RequestBody UserDTO request){
+    public ResponseEntity<String> createUser(@RequestBody UserRequest request){
         var response = _userService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-
-    @PostMapping("/infraInterfaces")
+    @PostMapping("/upload")
     public ResponseEntity<String> upload(@RequestParam(required = false) MultipartFile file){
         var response = _userService.upload(file);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/follow")
+    public ResponseEntity<String> followUser(@RequestParam String userId){
+        var response = _userService.followUser(userId);
         return ResponseEntity.ok(response);
     }
 }
