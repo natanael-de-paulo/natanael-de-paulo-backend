@@ -22,10 +22,18 @@ This project was developed with the objective of creating a basic social network
 To run this project, you must have the following programs installed:
 - Docker
 ### Installation:
-- Clone this project
-```git clone https://github.com/natanael-de-paulo/natanael-de-paulo-backend.git```
-- Enter the root folder ```cd natanael-de-paulo-backend/api```
-- Type the command in the terminal ```docker-compose up```
+Clone this project
+```bash
+git clone https://github.com/natanael-de-paulo/natanael-de-paulo-backend.git
+```
+Enter the root folder 
+```bash 
+cd natanael-de-paulo-backend/api
+```
+Type the command in the terminal 
+```bash 
+docker-compose up
+```
 
 
 ## ⚙ Functionalities
