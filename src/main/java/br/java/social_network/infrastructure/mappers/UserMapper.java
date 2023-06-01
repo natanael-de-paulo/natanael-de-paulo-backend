@@ -1,23 +1,22 @@
 package br.java.social_network.infrastructure.mappers;
 
-import br.java.social_network.application.models.user.IUserMapper;
+import br.java.social_network.application.mapper.IMapper;
 import br.java.social_network.application.models.user.UserDTO;
 import br.java.social_network.domain.entities.User;
-import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@NoArgsConstructor
-public class UserMapper implements IUserMapper {
+public class UserMapper implements IMapper<User, UserDTO> {
     @Autowired
-    private ModelMapper _modelMapper;
-
+    private ModelMapper modelMapper;
+    @Override
     public User toEntity(UserDTO userDTO){
-        return _modelMapper.map(userDTO, User.class);
+        return this.modelMapper.map(userDTO, User.class);
     }
+    @Override
     public UserDTO toDTO(User user){
-        return _modelMapper.map(user, UserDTO.class);
+        return this.modelMapper.map(user, UserDTO.class);
     }
 }

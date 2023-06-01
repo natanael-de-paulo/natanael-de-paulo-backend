@@ -5,10 +5,13 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class Profile {
     private String name;
     private Boolean image = false;
@@ -16,18 +19,18 @@ public class Profile {
     private List<UUID> following;
     private List<UUID> followers;
 
-    private Profile(){}
+    public static Profile create(Profile input){
+        var profile = new Profile();
+        profile.setName(input.name);
 
-    private Profile(Profile profile){
-        this.name = profile.name;
-        this.image = profile.image;
-        this.imageURL = profile.imageURL;
-        this.following = new ArrayList<>();
-        this.followers = new ArrayList<>();
-    }
+        if (!Objects.isNull(input.getImageURL())) {
+            profile.setImage(true);
+            profile.setImageURL(input.imageURL);
+        }
+        profile.setFollowing(new ArrayList<>());
+        profile.setFollowers(new ArrayList<>());
 
-    public static Profile create(Profile profile){
-        return new Profile(profile);
+        return profile;
     }
 
 }
