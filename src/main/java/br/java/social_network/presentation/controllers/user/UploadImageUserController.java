@@ -18,7 +18,7 @@ public class UploadImageUserController {
     private IUserService userService;
     @PostMapping
     public ResponseEntity<String> handle(@RequestParam(required = false) MultipartFile file){
-        var response = this.userService.upload(file);
-        return ResponseEntity.ok(response);
+        var response = this.userService.execute(file);
+        return ResponseEntity.ok(response.toString());
     }
 }

@@ -1,0 +1,20 @@
+package br.java.social_network.domain.services.user;
+
+import br.java.social_network.application.models.user.IUserService;
+import br.java.social_network.domain.entities.User;
+import br.java.social_network.infrastructure.repositories.IUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@Service
+@Qualifier("FindUserByEmailServiceImpl")
+public class FindUserByEmailServiceImpl implements IUserService<String, User> {
+    @Autowired
+    private IUserRepository userRepository;
+    @Override
+    public User execute(String email) {
+        var user = this.userRepository.findByEmail(email);
+        return user;
+    }
+}

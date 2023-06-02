@@ -17,7 +17,7 @@ public class FollowUserController {
     private IUserService userService;
     @PostMapping
     public ResponseEntity<String> handle(@RequestParam String userId){
-        var response = this.userService.followUser(userId);
-        return ResponseEntity.ok(response);
+        var response = this.userService.execute(userId);
+        return ResponseEntity.ok(response.toString());
     }
 }

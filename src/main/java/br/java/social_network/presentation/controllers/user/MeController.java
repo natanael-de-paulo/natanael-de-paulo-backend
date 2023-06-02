@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users/me")
 public class MeController {
     @Autowired
-    @Qualifier("FindUserServiceImpl")
+    @Qualifier("FindUserByIdServiceImpl")
     private IUserService userService;
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> handle(@PathVariable String userId){
-        var response = this.userService.findUserById(userId);
-        return ResponseEntity.ok().body(response);
+        var response = this.userService.execute(userId);
+        return ResponseEntity.ok().body((UserDTO) response);
     }
 }

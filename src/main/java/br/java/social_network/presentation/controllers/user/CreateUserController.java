@@ -17,7 +17,7 @@ public class CreateUserController {
 
     @PostMapping
     public ResponseEntity<String> handle(@RequestBody UserRequest request){
-        var response = this.userService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        var response = this.userService.execute(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response.toString());
     }
 }

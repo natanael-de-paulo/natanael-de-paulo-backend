@@ -1,8 +1,6 @@
 package br.java.social_network.domain.services.user;
 
 import br.java.social_network.application.models.user.IUserService;
-import br.java.social_network.application.models.user.UserDTO;
-import br.java.social_network.application.models.user.UserRequest;
 import br.java.social_network.application.utils.ConvertFormatId;
 import br.java.social_network.domain.entities.User;
 import br.java.social_network.infrastructure.repositories.IUserRepository;
@@ -10,39 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.UUID;
 
 @Service
 @Qualifier("FollowUserServiceImpl")
-public class FollowUserServiceImpl implements IUserService {
+public class FollowUserServiceImpl implements IUserService<String, String> {
     @Autowired
     private IUserRepository userRepository;
 
     @Override
-    public UserDTO findUserById(String userId) {
-        return null;
-    }
-
-    @Override
-    public String create(UserRequest request) {
-        return null;
-    }
-
-    @Override
-    public User findUserByEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public String upload(MultipartFile file) {
-        return null;
-    }
-
-    @Override
-    public String followUser(String userId) {
+    public String execute(String userId) {
         var userLogged = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         var userLoggedEntity = this.userRepository.findById(userLogged.getId());
         var handleUser = this.userRepository.findById(ConvertFormatId.toUUID(userId));
@@ -61,10 +38,7 @@ public class FollowUserServiceImpl implements IUserService {
 
         removeFollower(handleUserId, userLoggedId, handleUser.get(), userLoggedEntity.get());
         return "You unfollowed";
-
-
     }
-
 
     private void removeFollower(UUID handleUserId, UUID userLoggedId, User handleUserEntity, User userLoggedEntity) {
         handleUserEntity.getProfile().getFollowers().remove(userLoggedId);
