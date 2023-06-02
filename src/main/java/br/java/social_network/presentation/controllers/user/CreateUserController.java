@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class CreateUserController {
     @Autowired
     @Qualifier("CreateUserServiceImpl")
-    private IUserService userService;
+    private IUserService<UserRequest, String> userService;
 
     @PostMapping
     public ResponseEntity<String> handle(@RequestBody UserRequest request){
         var response = this.userService.execute(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response.toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

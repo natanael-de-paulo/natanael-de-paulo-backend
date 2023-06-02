@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements UserDetailsService {
     @Autowired
     @Qualifier("FindUserByEmailServiceImpl")
-    private IUserService userService;
+    private IUserService<String, UserDetails> userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) this.userService.execute(username);
+        return this.userService.execute(username);
     }
 }

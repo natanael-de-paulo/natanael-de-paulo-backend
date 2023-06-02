@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class FollowUserController {
     @Autowired
     @Qualifier("FollowUserServiceImpl")
-    private IUserService userService;
+    private IUserService<String, String> userService;
     @PostMapping
     public ResponseEntity<String> handle(@RequestParam String userId){
         var response = this.userService.execute(userId);
-        return ResponseEntity.ok(response.toString());
+        return ResponseEntity.ok(response);
     }
 }

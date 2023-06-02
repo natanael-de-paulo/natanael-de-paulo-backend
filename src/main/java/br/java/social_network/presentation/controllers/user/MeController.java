@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class MeController {
     @Autowired
     @Qualifier("FindUserByIdServiceImpl")
-    private IUserService userService;
+    private IUserService<String, UserDTO> userService;
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> handle(@PathVariable String userId){
         var response = this.userService.execute(userId);
-        return ResponseEntity.ok().body((UserDTO) response);
+        return ResponseEntity.ok().body(response);
     }
 }

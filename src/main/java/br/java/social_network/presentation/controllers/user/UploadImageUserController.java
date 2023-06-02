@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadImageUserController {
     @Autowired
     @Qualifier("UploadFileServiceImpl")
-    private IUserService userService;
+    private IUserService<MultipartFile, String> userService;
     @PostMapping
     public ResponseEntity<String> handle(@RequestParam(required = false) MultipartFile file){
         var response = this.userService.execute(file);
-        return ResponseEntity.ok(response.toString());
+        return ResponseEntity.ok(response);
     }
 }
