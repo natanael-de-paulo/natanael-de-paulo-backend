@@ -1,6 +1,6 @@
 package br.java.social_network.infrastructure.config;
 
-import br.java.social_network.application.models.infraInterfaces.ITokenProvider;
+import br.java.social_network.application.models.infra_interfaces.ITokenProvider;
 import br.java.social_network.infrastructure.repositories.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

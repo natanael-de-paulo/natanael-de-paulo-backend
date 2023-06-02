@@ -14,14 +14,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Document(collection = "users")
-@Data
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class User implements UserDetails {
     @Id private UUID id;
     private String email;
     private String password;
     private Profile profile;
-
-    private User(){};
 
     private User(String email, String password, Profile profile){
         this.id = UUID.randomUUID();
@@ -31,12 +30,8 @@ public class User implements UserDetails {
     }
 
     //using factory method
-    public static User create(UserRequest userDTO){
-        return new User(
-                userDTO.getEmail(),
-                userDTO.getPassword(),
-                userDTO.getProfile()
-        );
+    public static User create(UserRequest input){
+        return new User(input.getEmail(), input.getPassword(), input.getProfile());
     }
 
     @Override

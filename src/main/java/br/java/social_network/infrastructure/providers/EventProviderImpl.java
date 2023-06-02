@@ -1,6 +1,6 @@
 package br.java.social_network.infrastructure.providers;
 
-import br.java.social_network.application.models.infraInterfaces.IEventProvider;
+import br.java.social_network.application.models.infra_interfaces.IEventProvider;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
