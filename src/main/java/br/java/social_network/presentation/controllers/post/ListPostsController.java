@@ -17,11 +17,11 @@ import java.util.List;
 public class ListPostsController {
     @Autowired
     @Qualifier("ListPostServiceImpl")
-    private IPostService postService;
+    private IPostService<String, List<PostDTO>> postService;
 
     @GetMapping
     public ResponseEntity<List<PostDTO>> handle(@RequestParam String userId){
-        var response = this.postService.findPosts(userId);
+        var response = this.postService.execute(userId);
         return ResponseEntity.ok().body(response);
     }
 }

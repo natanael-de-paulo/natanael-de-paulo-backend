@@ -1,79 +1,30 @@
 package br.java.social_network.domain.services.post;
 
-import br.java.social_network.application.models.post.IPostService;
-import br.java.social_network.application.models.post.PostDTO;
-import br.java.social_network.application.models.post.PostRequest;
-import br.java.social_network.application.models.post.UpdatePostRequest;
-import br.java.social_network.application.models.post.comment.CommentRequest;
+import br.java.social_network.application.models.post.*;
 import br.java.social_network.application.utils.ConvertFormatId;
-import br.java.social_network.domain.embedded.Comment;
 import br.java.social_network.infrastructure.repositories.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Objects;
 
 @Service
 @Qualifier("UpdatePostServiceImpl")
-public class UpdatePostServiceImpl implements IPostService {
+public class UpdatePostServiceImpl implements IPostService<InputDataToUpdatePostService, Void> {
     @Autowired
     private IPostRepository postRepository;
 
     @Override
-    public List<PostDTO> findPosts(String userId) {
-        return null;
-    }
+    public Void execute(InputDataToUpdatePostService input) {
+        var post = this.postRepository.findById(ConvertFormatId.toUUID(input.getPostId()));
+        if (!post.isPresent()) throw new RuntimeException("Post not found!");
 
-    @Override
-    public PostDTO findPostById(String postId) {
-        return null;
-    }
+        if(!Objects.isNull(input.getTitle())) post.get().title(input.getTitle());
 
-    @Override
-    public PostDTO createPost(PostRequest post, String userId) {
-        return null;
-    }
-
-    @Override
-    public void updatePost(String postId, UpdatePostRequest dataToUpdate) throws Exception {
-        var post = this.postRepository.findById(ConvertFormatId.toUUID(postId));
-        if (!post.isPresent()) throw new Exception("Post not found!");
-
-        if(dataToUpdate.getTitle() != null) post.get().setTitle(dataToUpdate.getTitle());
-
-        if(dataToUpdate.getDescription() != null) post.get().setDescription(dataToUpdate.getDescription());
+        if(!Objects.isNull(input.getDescription())) post.get().description(input.getDescription());
 
         this.postRepository.save(post.get());
-    }
-
-    @Override
-    public void deletePost(String postId) throws Exception {
-
-    }
-
-    @Override
-    public String likePost(String postId, String userId) {
         return null;
-    }
-
-    @Override
-    public String likeAndUnlikeCommentToPost(String postId, String commentId, String userId) {
-        return null;
-    }
-
-    @Override
-    public void saveCommentToList(Comment comment, String postId) {
-
-    }
-
-    @Override
-    public void updateCommentToPost(String postId, String commentId, CommentRequest dataToUpdate) throws Exception {
-
-    }
-
-    @Override
-    public void deleteCommentToPost(String postId, String commentId) throws Exception {
-
     }
 }

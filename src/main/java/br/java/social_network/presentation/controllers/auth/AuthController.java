@@ -21,7 +21,7 @@ public class AuthController {
     private ITokenProvider tokenProvider;
     @Autowired
     @Qualifier("userMapper")
-    private IMapper userMapper;
+    private IMapper<User, UserDTO> userMapper;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -35,7 +35,7 @@ public class AuthController {
         Authentication authenticate = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         var user = (User) authenticate.getPrincipal();
-        var token = this.tokenProvider.generateToken((UserDTO) this.userMapper.toDTO(user));
+        var token = this.tokenProvider.generateToken(this.userMapper.toDTO(user));
 
         var response = new AuthDTO();
         response.setToken(token);

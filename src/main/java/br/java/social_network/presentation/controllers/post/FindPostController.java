@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class FindPostController {
     @Autowired
     @Qualifier("FindPostServiceImpl")
-    private IPostService postService;
+    private IPostService<String, PostDTO> postService;
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostDTO> handle(@PathVariable String postId){
-        var response = this.postService.findPostById(postId);
+        var response = this.postService.execute(postId);
         return ResponseEntity.ok(response);
     }
 }
