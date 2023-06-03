@@ -36,7 +36,6 @@ public class AuthController {
 
         var user = (User) authenticate.getPrincipal();
         var token = this.tokenProvider.generateToken(this.userMapper.toDTO(user));
-
         var response = new AuthDTO();
         response.setToken(token);
         return ResponseEntity.ok().body(response);

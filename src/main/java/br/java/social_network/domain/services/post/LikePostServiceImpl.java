@@ -2,6 +2,7 @@ package br.java.social_network.domain.services.post;
 
 import br.java.social_network.application.models.post.*;
 import br.java.social_network.application.utils.ConvertFormatId;
+import br.java.social_network.application.models.post.IPostService;
 import br.java.social_network.domain.embedded.Likes;
 import br.java.social_network.infrastructure.repositories.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,6 +5,8 @@ import br.java.social_network.application.models.infra_interfaces.IEventProvider
 import br.java.social_network.application.models.infra_interfaces.IUploadService;
 import br.java.social_network.application.models.post.*;
 import br.java.social_network.application.utils.ConvertFormatId;
+import br.java.social_network.application.models.post.IPostService;
+import br.java.social_network.application.models.post.PostDTO;
 import br.java.social_network.domain.entities.Post;
 import br.java.social_network.infrastructure.repositories.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;

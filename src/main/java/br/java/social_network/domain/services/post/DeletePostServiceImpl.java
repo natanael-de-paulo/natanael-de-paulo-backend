@@ -13,7 +13,6 @@ public class DeletePostServiceImpl implements IPostService<String, Void> {
     @Autowired
     private IPostRepository postRepository;
 
-    @Override
     public Void execute(String postId) {
         var post = this.postRepository.findById(ConvertFormatId.toUUID(postId));
         if (!post.isPresent()) throw new RuntimeException("Post not found!");
