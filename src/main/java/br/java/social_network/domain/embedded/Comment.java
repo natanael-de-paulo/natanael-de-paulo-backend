@@ -15,19 +15,27 @@ public class Comment {
     private UUID post_id;
     private UUID user_id;
     private List<Likes> likes;
-    private Comment(){}
 
-    private Comment(String description, UUID postId, UUID userId){
+    private Comment(){
         this.id = UUID.randomUUID();
-        this.description = description;
-        this.post_id = postId;
-        this.user_id = userId;
         this.likes = new ArrayList<>();
     }
-
-    public static Comment create(String description, UUID postId, UUID profileId ){
-        return new Comment(description, postId, profileId);
+    public static Comment builder(){
+        return new Comment();
     }
 
+    public Comment description(String description){
+        this.description = description;
+        return this;
+    }
 
+    public Comment postId(UUID postId){
+        this.post_id = postId;
+        return this;
+    }
+
+    public Comment user_id(UUID user_id){
+        this.user_id = user_id;
+        return this;
+    }
 }

@@ -1,4 +1,4 @@
-package br.java.social_network.application.models.infraInterfaces;
+package br.java.social_network.application.models.infra_interfaces;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

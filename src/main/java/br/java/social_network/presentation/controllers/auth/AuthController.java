@@ -1,11 +1,13 @@
-package br.java.social_network.presentation.controllers;
+package br.java.social_network.presentation.controllers.auth;
 
+import br.java.social_network.application.mapper.IMapper;
 import br.java.social_network.application.models.auth.AuthRequest;
-import br.java.social_network.application.models.infraInterfaces.ITokenProvider;
-import br.java.social_network.application.models.user.IUserMapper;
+import br.java.social_network.application.models.infra_interfaces.ITokenProvider;
+import br.java.social_network.application.models.user.UserDTO;
 import br.java.social_network.domain.entities.User;
 import br.java.social_network.application.models.auth.AuthDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,29 +15,27 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/api/v1")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
-    private ITokenProvider _tokenProvider;
-
+    private ITokenProvider tokenProvider;
     @Autowired
-    private IUserMapper _userMapper;
+    @Qualifier("userMapper")
+    private IMapper<User, UserDTO> userMapper;
     @Autowired
-    private AuthenticationManager _authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    @PostMapping("/auth")
+    @PostMapping
     public ResponseEntity<AuthDTO> auth(@RequestBody AuthRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()
         );
 
-        Authentication authenticate = this._authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        Authentication authenticate = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         var user = (User) authenticate.getPrincipal();
-        var token = _tokenProvider.generateToken(_userMapper.toDTO(user));
-
+        var token = this.tokenProvider.generateToken(this.userMapper.toDTO(user));
         var response = new AuthDTO();
         response.setToken(token);
         return ResponseEntity.ok().body(response);

@@ -1,6 +1,6 @@
-package br.java.social_network.domain.services;
+package br.java.social_network.domain.services.auth;
 
-import br.java.social_network.application.models.user.IUserService;
+import br.java.social_network.infrastructure.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements UserDetailsService {
     @Autowired
-    private IUserService _userService;
+    private IUserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) _userService.findUserByEmail(username);
+        return this.userRepository.findByEmail(username);
     }
 }
