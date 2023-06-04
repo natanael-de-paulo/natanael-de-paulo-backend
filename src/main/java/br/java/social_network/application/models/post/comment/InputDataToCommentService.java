@@ -1,7 +1,5 @@
 package br.java.social_network.application.models.post.comment;
 
-import br.java.social_network.application.models.post.InputDataToPostService;
-import br.java.social_network.application.models.post.PostRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +10,7 @@ public class InputDataToCommentService {
     private String postId;
     private String commentId;
     private String userId;
-    private CommentRequest commentRequest;
+    private CommentRequestDTO commentRequestDTO;
 
     public static InputDataToCommentService builder(){
         return new InputDataToCommentService();
@@ -33,8 +31,8 @@ public class InputDataToCommentService {
         return this;
     }
 
-    public InputDataToCommentService commentRequest(CommentRequest commentRequest){
-        this.postId = postId;
+    public InputDataToCommentService commentRequest(CommentRequestDTO commentRequestDTO){
+        this.commentRequestDTO = commentRequestDTO;
         return this;
     }
 }

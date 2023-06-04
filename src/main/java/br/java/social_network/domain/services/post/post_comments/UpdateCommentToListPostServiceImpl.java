@@ -24,7 +24,7 @@ public class UpdateCommentToListPostServiceImpl implements IPostService<InputDat
                 .findFirst();
 
         if (!comment.isPresent()) throw new RuntimeException("Comment not found!");
-        comment.get().setDescription(input.getCommentRequest().description);
+        comment.get().setDescription(input.getCommentRequestDTO().description());
         this.postRepository.save(post.get());
         return null;
     }

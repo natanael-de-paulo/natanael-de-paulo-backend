@@ -1,7 +1,7 @@
 package br.java.social_network.infrastructure.providers;
 
 import br.java.social_network.application.models.infra_interfaces.ITokenProvider;
-import br.java.social_network.application.models.user.UserDTO;
+import br.java.social_network.application.models.user.UserResponseDTO;
 import br.java.social_network.application.utils.ConvertFormatId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,7 +20,7 @@ public class TokenProviderImpl implements ITokenProvider {
     }
 
     @Override
-    public String generateToken(UserDTO user){
+    public String generateToken(UserResponseDTO user){
         return Jwts
                 .builder()
                 .setSubject(user.getEmail())

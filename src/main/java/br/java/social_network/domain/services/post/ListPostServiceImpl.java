@@ -2,7 +2,7 @@ package br.java.social_network.domain.services.post;
 
 import br.java.social_network.application.mapper.IMapper;
 import br.java.social_network.application.models.post.IPostService;
-import br.java.social_network.application.models.post.PostDTO;
+import br.java.social_network.application.models.post.PostResponseDTO;
 import br.java.social_network.application.utils.ConvertFormatId;
 import br.java.social_network.domain.entities.Post;
 import br.java.social_network.infrastructure.repositories.IPostRepository;
@@ -15,21 +15,21 @@ import java.util.List;
 
 @Service
 @Qualifier("ListPostServiceImpl")
-public class ListPostServiceImpl implements IPostService<String, List<PostDTO>> {
+public class ListPostServiceImpl implements IPostService<String, List<PostResponseDTO>> {
     @Autowired
     private IPostRepository postRepository;
     @Autowired
     @Qualifier("postMapper")
-    private IMapper<Post, PostDTO>postMapper;
+    private IMapper<Post, PostResponseDTO>postMapper;
 
     @Override
-    public List<PostDTO> execute(String userId){
+    public List<PostResponseDTO> execute(String userId){
         var data = this.postRepository.findAll(ConvertFormatId.toUUID(userId));
-        List<PostDTO> postList = new ArrayList<>();
+        List<PostResponseDTO> postList = new ArrayList<>();
 
         for (Post post : data){
             var responseData = this.postMapper.toDTO(post);
-            postList.add((PostDTO) responseData);
+            postList.add((PostResponseDTO) responseData);
         }
 
         return postList;

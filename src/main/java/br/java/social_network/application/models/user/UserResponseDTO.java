@@ -2,10 +2,14 @@ package br.java.social_network.application.models.user;
 
 import br.java.social_network.domain.embedded.Profile;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
-public class UserRequest {
+@NoArgsConstructor
+public class UserResponseDTO {
+    private UUID id;
     private String email;
-    private String password;
     private Profile profile;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class InputDataToPostService {
-    private PostRequest postRequest;
+    private PostRequestDTO postRequestDTO;
     private String userId;
     private String postId;
 
@@ -15,8 +15,8 @@ public class InputDataToPostService {
         return new InputDataToPostService();
     }
 
-    public InputDataToPostService postRequest(PostRequest postRequest){
-        this.postRequest = postRequest;
+    public InputDataToPostService postRequest(PostRequestDTO postRequestDTO){
+        this.postRequestDTO = postRequestDTO;
         return this;
     }
 

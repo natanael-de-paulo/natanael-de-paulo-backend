@@ -1,6 +1,6 @@
 package br.java.social_network.presentation.controllers.comment;
 
-import br.java.social_network.application.models.post.comment.CommentRequest;
+import br.java.social_network.application.models.post.comment.CommentRequestDTO;
 import br.java.social_network.application.models.post.comment.ICommentService;
 import br.java.social_network.application.models.post.comment.InputDataToCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class UpdateCommentController {
     private ICommentService<InputDataToCommentService, String> commentService;
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<String> handle(@PathVariable String postId, @PathVariable String commentId, @RequestBody CommentRequest dataToUpdate){
+    public ResponseEntity<String> handle(@PathVariable String postId, @PathVariable String commentId, @RequestBody CommentRequestDTO dataToUpdate){
         var input = InputDataToCommentService.builder().postId(postId).commentId(commentId).commentRequest(dataToUpdate);
         var response = this.commentService.execute(input);
         return ResponseEntity.ok().body(response);

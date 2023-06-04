@@ -1,7 +1,7 @@
 package br.java.social_network.presentation.controllers.comment;
 
-import br.java.social_network.application.models.post.comment.CommentDTO;
-import br.java.social_network.application.models.post.comment.CommentRequest;
+import br.java.social_network.application.models.post.comment.CommentResponseDTO;
+import br.java.social_network.application.models.post.comment.CommentRequestDTO;
 import br.java.social_network.application.models.post.comment.ICommentService;
 import br.java.social_network.application.models.post.comment.InputDataToCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class CreateCommentController {
     @Autowired
     @Qualifier("CreateCommentServiceImpl")
-    private ICommentService<InputDataToCommentService, CommentDTO> commentService;
+    private ICommentService<InputDataToCommentService, CommentResponseDTO> commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<CommentDTO> handle(@PathVariable String postId, @RequestParam String userId, @RequestBody CommentRequest request){
+    public ResponseEntity<CommentResponseDTO> handle(@PathVariable String postId, @RequestParam String userId, @RequestBody CommentRequestDTO request){
         var input = InputDataToCommentService
                 .builder()
                 .postId(postId)

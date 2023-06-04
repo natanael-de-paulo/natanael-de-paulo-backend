@@ -1,7 +1,7 @@
 package br.java.social_network.domain.entities;
 
 import br.java.social_network.domain.embedded.Profile;
-import br.java.social_network.application.models.user.UserRequest;
+import br.java.social_network.application.models.user.UserRequestDTO;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,8 +30,8 @@ public class User implements UserDetails {
     }
 
     //using factory method
-    public static User create(UserRequest input){
-        return new User(input.getEmail(), input.getPassword(), input.getProfile());
+    public static User create(UserRequestDTO input){
+        return new User(input.email(), input.password(), input.profile());
     }
 
     @Override
