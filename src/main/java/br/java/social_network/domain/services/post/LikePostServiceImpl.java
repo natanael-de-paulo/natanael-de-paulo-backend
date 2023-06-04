@@ -18,7 +18,7 @@ public class LikePostServiceImpl implements IPostService<InputDataToPostService,
     @Override
     public String execute(InputDataToPostService input){
         var post = this.postRepository.findById(ConvertFormatId.toUUID(input.getPostId()));
-        var like = new Likes(ConvertFormatId.toUUID(input.getUserId()));
+        var like = Likes.builder().createLikeObj(ConvertFormatId.toUUID(input.getUserId()));
 
         if (post.get().getLikes().contains(like)) {
             post.get().getLikes().remove(like);
