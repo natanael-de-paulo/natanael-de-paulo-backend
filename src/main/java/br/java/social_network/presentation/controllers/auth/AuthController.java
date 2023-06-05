@@ -3,7 +3,7 @@ package br.java.social_network.presentation.controllers.auth;
 import br.java.social_network.application.mapper.IMapper;
 import br.java.social_network.application.models.auth.AuthRequest;
 import br.java.social_network.application.models.infra_interfaces.ITokenProvider;
-import br.java.social_network.application.models.user.UserDTO;
+import br.java.social_network.application.models.user.UserResponseDTO;
 import br.java.social_network.domain.entities.User;
 import br.java.social_network.application.models.auth.AuthDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class AuthController {
     private ITokenProvider tokenProvider;
     @Autowired
     @Qualifier("userMapper")
-    private IMapper<User, UserDTO> userMapper;
+    private IMapper<User, UserResponseDTO> userMapper;
     @Autowired
     private AuthenticationManager authenticationManager;
 

@@ -1,7 +1,7 @@
 package br.java.social_network.presentation.controllers.post;
 
 import br.java.social_network.application.models.post.IPostService;
-import br.java.social_network.application.models.post.PostDTO;
+import br.java.social_network.application.models.post.PostResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class FindPostController {
     @Autowired
     @Qualifier("FindPostServiceImpl")
-    private IPostService<String, PostDTO> postService;
+    private IPostService<String, PostResponseDTO> postService;
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostDTO> handle(@PathVariable String postId){
+    public ResponseEntity<PostResponseDTO> handle(@PathVariable String postId){
         var response = this.postService.execute(postId);
         return ResponseEntity.ok(response);
     }

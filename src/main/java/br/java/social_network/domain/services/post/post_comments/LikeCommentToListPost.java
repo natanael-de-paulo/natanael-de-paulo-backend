@@ -18,7 +18,7 @@ public class LikeCommentToListPost implements IPostService<InputDataToCommentSer
     @Override
     public String execute(InputDataToCommentService input) {
         var post = this.postRepository.findById(ConvertFormatId.toUUID(input.getPostId()));
-        var like = new Likes(ConvertFormatId.toUUID(input.getUserId()));
+        var like = Likes.builder().createLikeObj(ConvertFormatId.toUUID(input.getUserId()));
         var comment = post.get().getComments().stream()
                 .filter(c -> c.getId().equals(ConvertFormatId.toUUID(input.getCommentId())))
                 .findFirst();

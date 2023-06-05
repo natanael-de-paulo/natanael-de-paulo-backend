@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PostDTO {
+public class PostResponseDTO {
     private UUID id;
     private String title;
     private String description;

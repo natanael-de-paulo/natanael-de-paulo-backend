@@ -1,6 +1,6 @@
 package br.java.social_network.presentation.controllers.comment;
 
-import br.java.social_network.application.models.post.comment.CommentDTO;
+import br.java.social_network.application.models.post.comment.CommentResponseDTO;
 import br.java.social_network.application.models.post.comment.ICommentService;
 import br.java.social_network.application.models.post.comment.InputDataToCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class FindCommentController {
     @Autowired
     @Qualifier("FindCommentServiceImpl")
-    private ICommentService<InputDataToCommentService, CommentDTO> commentService;
+    private ICommentService<InputDataToCommentService, CommentResponseDTO> commentService;
 
     @GetMapping("/{commentId}")
-    public ResponseEntity<CommentDTO> handle(@PathVariable String postId, @PathVariable String commentId){
+    public ResponseEntity<CommentResponseDTO> handle(@PathVariable String postId, @PathVariable String commentId){
         var input = InputDataToCommentService.builder().postId(postId).commentId(commentId);
         var response = this.commentService.execute(input);
         return ResponseEntity.ok().body(response);
