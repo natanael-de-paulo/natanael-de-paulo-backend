@@ -14,6 +14,7 @@ public class Likes {
     public static Likes builder(){
         return new Likes();
     }
+
     public Likes createLikeObj(UUID userId) {
         this.user_id = userId;
         return this;

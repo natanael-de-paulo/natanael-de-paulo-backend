@@ -11,8 +11,6 @@ import java.util.UUID;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 public class Profile {
     private String name;
     private Boolean image = false;
@@ -20,18 +18,27 @@ public class Profile {
     private List<UUID> following;
     private List<UUID> followers;
 
-    public static Profile create(Profile input){
-        var profile = new Profile();
-        profile.setName(input.name);
-
-        if (!Objects.isNull(input.getImageURL())) {
-            profile.setImage(true);
-            profile.setImageURL(input.imageURL);
-        }
-        profile.setFollowing(new ArrayList<>());
-        profile.setFollowers(new ArrayList<>());
-
-        return profile;
+    private Profile(){
+        this.followers = new ArrayList<>();
+        this.following = new ArrayList<>();
     }
 
+    public static Profile builder(){
+        return new Profile();
+    }
+
+
+    public Profile name(String name){
+        this.name = name;
+        return this;
+    }
+
+    public Profile image(Boolean image, String imageUrl){
+        if (!Objects.isNull(imageUrl)) {
+            this.imageURL = imageUrl;
+            this.image = image;
+        }
+
+        return this;
+    }
 }

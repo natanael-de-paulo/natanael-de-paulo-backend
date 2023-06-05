@@ -1,11 +1,11 @@
 package br.java.social_network.presentation.controllers.auth;
 
 import br.java.social_network.application.mapper.IMapper;
-import br.java.social_network.application.models.auth.AuthRequest;
+import br.java.social_network.application.models.auth.AuthRequestDTO;
 import br.java.social_network.application.models.infra_interfaces.ITokenProvider;
 import br.java.social_network.application.models.user.UserResponseDTO;
 import br.java.social_network.domain.entities.User;
-import br.java.social_network.application.models.auth.AuthDTO;
+import br.java.social_network.application.models.auth.AuthResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +26,17 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping
-    public ResponseEntity<AuthDTO> auth(@RequestBody AuthRequest request) {
+    public ResponseEntity<AuthResponseDTO> auth(@RequestBody AuthRequestDTO request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                 = new UsernamePasswordAuthenticationToken(
-                request.getEmail(), request.getPassword()
+                request.email(), request.password()
         );
 
         Authentication authenticate = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         var user = (User) authenticate.getPrincipal();
         var token = this.tokenProvider.generateToken(this.userMapper.toDTO(user));
-        var response = new AuthDTO();
+        var response = new AuthResponseDTO();
         response.setToken(token);
         return ResponseEntity.ok().body(response);
     }

@@ -29,9 +29,23 @@ public class User implements UserDetails {
         this.profile = profile;
     }
 
-    //using factory method
-    public static User create(UserRequestDTO input){
-        return new User(input.email(), input.password(), input.profile());
+    public static User builder(){
+        return new User();
+    }
+
+    public User email(String email){
+        this.email = email;
+        return this;
+    }
+
+    public User password(String password){
+        this.password = password;
+        return this;
+    }
+
+    public User profile(Profile profile){
+        this.profile = profile;
+        return this;
     }
 
     @Override

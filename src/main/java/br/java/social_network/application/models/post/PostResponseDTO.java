@@ -20,7 +20,7 @@ public class PostResponseDTO {
     private String description;
     private Boolean image = false;
     private String imageUrl;
-    private UUID user_id;;
+    private UUID user_id;
     private List<Comment> comments;
     private List<Likes> likes;
 }
