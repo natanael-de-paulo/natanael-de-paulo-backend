@@ -29,7 +29,6 @@ public class User implements UserDetails {
         this.profile = profile;
     }
 
-    //using factory method
     public static User builder(){
         return new User();
     }
