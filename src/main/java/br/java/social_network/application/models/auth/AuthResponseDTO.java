@@ -2,8 +2,7 @@ package br.java.social_network.application.models.auth;
 
 import lombok.Data;
 @Data
-
-public class AuthDTO {
+public class AuthResponseDTO {
     private String token;
-    public AuthDTO(){}
+    public AuthResponseDTO(){}
 }

@@ -25,13 +25,17 @@ public class CreateUserServiceImpl implements IUserService<UserRequestDTO, Strin
 
         if(!Objects.isNull(query)) throw new RuntimeException("Email already exists");
 
-        var profile = Profile.create(request.profile());
-        request.setProfile(profile);
+        var profile = Profile.builder()
+                .name(request.profile().getName())
+                .image(request.profile().getImage(), request.profile().getImageURL());
 
         var passHash = this.passwordEncoder.encode(request.password());
-        request.setPassword(passHash);
 
-        var user = User.create(request);
+        var user = User.builder()
+                .email(request.email())
+                .password(passHash)
+                .profile(profile);
+
         this.userRepository.insert(user);
         return user.getId().toString();
     }
