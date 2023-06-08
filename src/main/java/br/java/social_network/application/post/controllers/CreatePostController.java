@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/posts/create")
+@RequestMapping("/posts")
 public class CreatePostController {
     @Autowired
     @Qualifier("CreatePostServiceImpl")
