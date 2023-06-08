@@ -1,8 +1,6 @@
 package br.java.social_network.domain.user;
 
 import br.java.social_network.domain.user.embedded.Profile;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,10 +16,7 @@ import java.util.UUID;
 @Getter
 public class User implements UserDetails {
     @Id private UUID id;
-    @NotNull
-    @NotBlank(message = "email is required")
     private String email;
-    @NotBlank(message = "password is required")
     private String password;
     private Profile profile;
 

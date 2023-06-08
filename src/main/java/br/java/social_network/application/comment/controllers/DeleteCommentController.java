@@ -8,13 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/posts/{postId}/comments")
+@RequestMapping("/posts/{postId}/comments/{commentId}")
 public class DeleteCommentController {
     @Autowired
     @Qualifier("DeleteCommentServiceImpl")
     private ICommentService<InputDataToCommentService, String> commentService;
 
-    @DeleteMapping("/{commentId}")
+    @DeleteMapping
     public ResponseEntity<String> handle(@PathVariable String postId, @PathVariable String commentId){
         var input = InputDataToCommentService.builder().postId(postId).commentId(commentId);
         var response = this.commentService.execute(input);

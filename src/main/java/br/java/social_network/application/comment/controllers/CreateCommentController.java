@@ -16,7 +16,7 @@ public class CreateCommentController {
     @Qualifier("CreateCommentServiceImpl")
     private ICommentService<InputDataToCommentService, CommentResponseDTO> commentService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<CommentResponseDTO> handle(@PathVariable String postId, @RequestParam String userId, @RequestBody CommentRequestDTO request){
         var input = InputDataToCommentService
                 .builder()
