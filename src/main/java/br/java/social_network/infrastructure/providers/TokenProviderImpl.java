@@ -1,7 +1,7 @@
 package br.java.social_network.infrastructure.providers;
 
-import br.java.social_network.application.models.infra_interfaces.ITokenProvider;
-import br.java.social_network.application.models.user.UserResponseDTO;
+import br.java.social_network.infrastructure.providers.interfaces.ITokenProvider;
+import br.java.social_network.application.user.controllers.response.UserResponseDTO;
 import br.java.social_network.application.utils.ConvertFormatId;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

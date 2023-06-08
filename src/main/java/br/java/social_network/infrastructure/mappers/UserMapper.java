@@ -1,8 +1,7 @@
 package br.java.social_network.infrastructure.mappers;
 
-import br.java.social_network.application.mapper.IMapper;
-import br.java.social_network.application.models.user.UserResponseDTO;
-import br.java.social_network.domain.entities.User;
+import br.java.social_network.application.user.controllers.response.UserResponseDTO;
+import br.java.social_network.domain.user.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

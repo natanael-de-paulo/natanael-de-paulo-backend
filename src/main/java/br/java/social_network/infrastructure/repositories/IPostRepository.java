@@ -1,6 +1,6 @@
 package br.java.social_network.infrastructure.repositories;
 
-import br.java.social_network.domain.entities.Post;
+import br.java.social_network.domain.post.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
