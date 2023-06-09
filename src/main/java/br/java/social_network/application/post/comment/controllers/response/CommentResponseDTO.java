@@ -1,4 +1,4 @@
-package br.java.social_network.application.comment.controllers.response;
+package br.java.social_network.application.post.comment.controllers.response;
 
 import br.java.social_network.domain.post.embedded.Comment;
 import br.java.social_network.domain.post.embedded.Likes;

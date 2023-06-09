@@ -27,5 +27,4 @@ public class EventProviderImpl implements IEventProvider {
     public void consume(ConsumerRecord<String, String> event){
         System.out.println(event.value());
     }
-
 }

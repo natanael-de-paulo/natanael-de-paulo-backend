@@ -1,4 +1,4 @@
-package br.java.social_network.domain.user.services;
+package br.java.social_network.infrastructure.services;
 
 import br.java.social_network.infrastructure.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

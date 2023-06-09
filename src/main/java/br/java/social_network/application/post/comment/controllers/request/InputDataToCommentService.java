@@ -1,4 +1,4 @@
-package br.java.social_network.application.comment.controllers.request;
+package br.java.social_network.application.post.comment.controllers.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;

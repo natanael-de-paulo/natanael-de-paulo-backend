@@ -19,7 +19,7 @@ public class AwsProviderImpl implements IAwsProvider {
     private AmazonS3 _amazonS3;
 
     @Override
-    public String upload(MultipartFile multipartFile, String fileName) throws Exception{
+    public String upload(MultipartFile multipartFile, String fileName) throws Exception {
         var imagePath = "";
         try {
             var convertedFile = convertMultiPartToFile(multipartFile);

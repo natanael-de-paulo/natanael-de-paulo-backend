@@ -1,7 +1,7 @@
-package br.java.social_network.application.comment.controllers;
+package br.java.social_network.application.post.comment.controllers;
 
-import br.java.social_network.application.comment.services.ICommentService;
-import br.java.social_network.application.comment.controllers.request.InputDataToCommentService;
+import br.java.social_network.application.post.comment.services.ICommentService;
+import br.java.social_network.application.post.comment.controllers.request.InputDataToCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,5 @@
 package br.java.social_network.application.post.controllers.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +32,7 @@ public class InputDataToPostService {
         return this;
     }
 
-    public InputDataToPostService file( MultipartFile file){
+    public InputDataToPostService file(MultipartFile file){
         this.file = file;
         return this;
     }

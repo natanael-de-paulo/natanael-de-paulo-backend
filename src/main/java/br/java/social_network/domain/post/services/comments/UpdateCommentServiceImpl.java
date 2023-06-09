@@ -1,8 +1,8 @@
 package br.java.social_network.domain.post.services.comments;
 
 import br.java.social_network.application.post.services.IPostService;
-import br.java.social_network.application.comment.services.ICommentService;
-import br.java.social_network.application.comment.controllers.request.InputDataToCommentService;
+import br.java.social_network.application.post.comment.services.ICommentService;
+import br.java.social_network.application.post.comment.controllers.request.InputDataToCommentService;
 import br.java.social_network.infrastructure.exception.HandleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

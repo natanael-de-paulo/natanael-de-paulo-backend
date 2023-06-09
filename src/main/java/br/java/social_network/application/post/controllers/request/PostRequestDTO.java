@@ -1,8 +1,5 @@
 package br.java.social_network.application.post.controllers.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.web.multipart.MultipartFile;
-
 public record PostRequestDTO (
     String title,
     String description

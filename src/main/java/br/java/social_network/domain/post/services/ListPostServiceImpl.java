@@ -20,7 +20,7 @@ public class ListPostServiceImpl implements IPostService<String, List<PostRespon
     private IPostRepository postRepository;
     @Autowired
     @Qualifier("postMapper")
-    private IMapper<Post, PostResponseDTO>postMapper;
+    private IMapper<Post, PostResponseDTO> postMapper;
 
     @Override
     public List<PostResponseDTO> execute(String userId){
@@ -29,7 +29,7 @@ public class ListPostServiceImpl implements IPostService<String, List<PostRespon
 
         for (Post post : data){
             var responseData = this.postMapper.toDTO(post);
-            postList.add((PostResponseDTO) responseData);
+            postList.add(responseData);
         }
 
         return postList;

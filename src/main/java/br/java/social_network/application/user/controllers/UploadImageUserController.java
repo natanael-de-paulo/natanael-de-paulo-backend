@@ -23,7 +23,7 @@ public class UploadImageUserController {
         try {
             response = this.userService.execute(file);
             return ResponseEntity.ok(response);
-        } catch (HandleNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

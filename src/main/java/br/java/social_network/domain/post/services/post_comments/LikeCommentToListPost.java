@@ -1,7 +1,7 @@
 package br.java.social_network.domain.post.services.post_comments;
 
 import br.java.social_network.application.post.services.IPostService;
-import br.java.social_network.application.comment.controllers.request.InputDataToCommentService;
+import br.java.social_network.application.post.comment.controllers.request.InputDataToCommentService;
 import br.java.social_network.application.utils.ConvertFormatId;
 import br.java.social_network.domain.post.embedded.Likes;
 import br.java.social_network.infrastructure.repositories.IPostRepository;
