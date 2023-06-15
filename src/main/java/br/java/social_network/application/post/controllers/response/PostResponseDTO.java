@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,9 +20,13 @@ public class PostResponseDTO {
     private UUID id;
     private String title;
     private String description;
-    private Boolean image = false;
+    private Boolean image;
     private String imageUrl;
     private UUID user_id;
     private List<Comment> comments;
     private List<Likes> likes;
+    private Integer version;
+    private Instant createdAt;
+    private Instant updatedAt;
+
 }

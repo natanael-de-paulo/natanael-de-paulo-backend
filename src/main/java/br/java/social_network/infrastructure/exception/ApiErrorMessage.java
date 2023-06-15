@@ -1,11 +1,7 @@
 package br.java.social_network.infrastructure.exception;
 
-import com.amazonaws.services.sqs.model.Message;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Getter
 public class ApiErrorMessage {

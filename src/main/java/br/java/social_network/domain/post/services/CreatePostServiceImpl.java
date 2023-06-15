@@ -39,12 +39,12 @@ public class CreatePostServiceImpl implements IPostService<InputDataToPostServic
                 .title(input.getPostRequestDTO().title())
                 .description(input.getPostRequestDTO().description())
                 .image(existFile ? true : false)
-                .imageUrl(existFile ? imageUrl : null)
+                .imageUrl(imageUrl)
                 .userId(ConvertFormatId.toUUID(input.getUserId()));
 
 
         this.postRepository.insert(post);
-        this.eventService.send("post-created", post.getId().toString());
+        this.eventService.send("post-created", post);
         return this.postMapper.toDTO(post);
     }
 }

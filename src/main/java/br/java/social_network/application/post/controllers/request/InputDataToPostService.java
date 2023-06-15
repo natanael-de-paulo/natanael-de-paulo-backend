@@ -1,5 +1,6 @@
 package br.java.social_network.application.post.controllers.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ public class InputDataToPostService {
     private PostRequestDTO postRequestDTO;
     private String userId;
     private String postId;
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private MultipartFile file;
 
     public static InputDataToPostService build(){

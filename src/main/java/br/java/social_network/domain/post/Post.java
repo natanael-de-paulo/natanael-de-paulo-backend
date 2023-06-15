@@ -2,10 +2,15 @@ package br.java.social_network.domain.post;
 
 import br.java.social_network.domain.post.embedded.Comment;
 import br.java.social_network.domain.post.embedded.Likes;
+import lombok.Builder;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -56,5 +61,4 @@ public class Post {
         this.user_id = userId;
         return this;
     }
-
 }

@@ -1,0 +1,26 @@
+package br.java.social_network.application.feed.controllers;
+
+import br.java.social_network.application.feed.IFeedService;
+import br.java.social_network.application.post.controllers.response.PostResponseDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/feed")
+public class FeedController {
+    @Autowired
+    private IFeedService feedService;
+
+    @GetMapping
+    public ResponseEntity<List<PostResponseDTO>> handle(@RequestParam String userId){
+        var output = this.feedService.execute(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(output);
+    }
+}
