@@ -22,26 +22,24 @@ public class CreateUserServiceImpl implements IUserService<UserRequestDTO, Strin
 
     @Override
     public String execute(UserRequestDTO request) {
-        try{
-            var query = this.userRepository.findByEmail(request.email());
+        var query = this.userRepository.findByEmail(request.email());
 
-            if(!Objects.isNull(query)) throw new Exception("Email already exists");
+        if(!Objects.isNull(query)) throw new HandleEntityAlreadyExistsException("Email already exists");
 
-            var profile = Profile.builder()
-                    .name(request.profile().name())
-                    .image(request.profile().image(), request.profile().imageURL());
+        var profile = Profile.builder()
+                .name(request.profile().name())
+                .image(request.profile().image(), request.profile().imageURL());
 
-            var passHash = this.passwordEncoder.encode(request.password());
+        var user = User.builder()
+                .email(request.email())
+                .password(passHash(request.password()))
+                .profile(profile);
 
-            var user = User.builder()
-                    .email(request.email())
-                    .password(passHash)
-                    .profile(profile);
+        this.userRepository.insert(user);
+        return user.getId().toString();
+    }
 
-            this.userRepository.insert(user);
-            return user.getId().toString();
-        } catch (Exception e){
-            throw new HandleEntityAlreadyExistsException(e.getMessage());
-        }
+    private String passHash (String password) {
+        return this.passwordEncoder.encode(password);
     }
 }

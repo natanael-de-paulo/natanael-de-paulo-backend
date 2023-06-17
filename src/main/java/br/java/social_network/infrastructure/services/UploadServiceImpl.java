@@ -1,4 +1,4 @@
-package br.java.social_network.infrastructure.services.upload;
+package br.java.social_network.infrastructure.services;
 
 import br.java.social_network.infrastructure.providers.interfaces.IUploadService;
 import br.java.social_network.domain.user.User;
