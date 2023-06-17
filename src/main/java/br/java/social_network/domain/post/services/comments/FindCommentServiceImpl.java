@@ -20,13 +20,9 @@ public class FindCommentServiceImpl implements ICommentService<InputDataToCommen
 
     @Override
     public CommentResponseDTO execute(InputDataToCommentService input){
-        try{
-            var comments = this.postService.execute(input.getPostId()).getComments();
-            var comment = comments.stream().filter(c -> c.getId().equals(ConvertFormatId.toUUID(input.getCommentId()))).findFirst();
-            return new CommentResponseDTO(comment.get());
-        } catch (Exception e) {
-            if (e.getMessage() == "No value present") throw new HandleNotFoundException("Comment not found");
-            throw new HandleNotFoundException(e.getMessage());
-        }
+        var comments = this.postService.execute(input.getPostId()).getComments();
+        var comment = comments.stream().filter(c -> c.getId().equals(ConvertFormatId.toUUID(input.getCommentId()))).findFirst();
+        if (!comment.isPresent()) if (!comment.isPresent()) throw new HandleNotFoundException("Comment not found!");
+        return new CommentResponseDTO(comment.get());
     }
 }

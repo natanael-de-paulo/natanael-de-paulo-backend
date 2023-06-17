@@ -18,17 +18,13 @@ public class SaveCommentToPostListServiceImpl implements IPostService<Comment, V
 
     @Override
     public Void execute(Comment comment) {
-        try {
-            var post = this.postRepository.findById(comment.getPost_id());
+        var post = this.postRepository.findById(comment.getPost_id());
 
-            post.get().getComments().add(comment);
+        if (!post.isPresent()) throw new HandleNotFoundException("Post not found!");
 
-            this.postRepository.save(post.get());
+        post.get().getComments().add(comment);
+        this.postRepository.save(post.get());
 
-            return null;
-        } catch (Exception e){
-            if (e.getMessage() == "No value present") throw new HandleNotFoundException("Post not found");
-            throw new HandleNotFoundException(e.getMessage());
-        }
+        return null;
     }
 }

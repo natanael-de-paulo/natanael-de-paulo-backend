@@ -19,18 +19,14 @@ public class UpdatePostServiceImpl implements IPostService<InputDataToUpdatePost
 
     @Override
     public Void execute(InputDataToUpdatePostService input) {
-      try{
-          var post = this.postRepository.findById(ConvertFormatId.toUUID(input.getPostId()));
-          if (!post.isPresent()) throw new Exception("Post not found!");
+        var post = this.postRepository.findById(ConvertFormatId.toUUID(input.getPostId()));
+        if (!post.isPresent()) throw new HandleNotFoundException("Post not found!");
 
-          if(!Objects.isNull(input.getTitle())) post.get().title(input.getTitle());
+        if(!Objects.isNull(input.getTitle())) post.get().title(input.getTitle());
 
-          if(!Objects.isNull(input.getDescription())) post.get().description(input.getDescription());
+        if(!Objects.isNull(input.getDescription())) post.get().description(input.getDescription());
 
-          this.postRepository.save(post.get());
-          return null;
-      } catch (Exception e){
-          throw new HandleNotFoundException(e.getMessage());
-      }
+        this.postRepository.save(post.get());
+        return null;
     }
 }
