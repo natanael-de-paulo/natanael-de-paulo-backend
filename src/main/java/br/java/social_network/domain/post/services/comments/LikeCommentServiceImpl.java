@@ -16,11 +16,7 @@ public class LikeCommentServiceImpl implements ICommentService<InputDataToCommen
 
     @Override
     public String execute(InputDataToCommentService input){
-        try {
-            var response = this.postService.execute(input);
-            return response;
-        } catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
+        var response = this.postService.execute(input);
+        return response;
     }
 }

@@ -4,5 +4,5 @@ import br.java.social_network.application.auth.controllers.request.AuthRequestDT
 import br.java.social_network.application.auth.controllers.response.AuthResponseDTO;
 
 public interface IAuthService {
-    AuthResponseDTO auth(AuthRequestDTO request);
+    AuthResponseDTO execute(AuthRequestDTO request);
 }

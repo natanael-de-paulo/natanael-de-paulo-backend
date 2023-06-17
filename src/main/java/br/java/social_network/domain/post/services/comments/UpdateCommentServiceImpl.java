@@ -19,7 +19,7 @@ public class UpdateCommentServiceImpl implements ICommentService<InputDataToComm
     public String execute(InputDataToCommentService input){
         try {
             this.postService.execute(input);
-            return "Updated comments";
+            return "Updated comment";
         } catch (Exception e) {
             throw new HandleNotFoundException(e.getMessage());
         }

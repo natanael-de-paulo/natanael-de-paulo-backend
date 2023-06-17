@@ -1,4 +1,4 @@
-package br.java.social_network.infrastructure.providers.interfaces;
+package br.java.social_network.application.auth.services;
 
 import br.java.social_network.application.user.controllers.response.UserResponseDTO;
 import io.jsonwebtoken.Claims;

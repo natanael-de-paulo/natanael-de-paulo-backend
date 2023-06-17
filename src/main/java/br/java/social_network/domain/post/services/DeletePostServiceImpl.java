@@ -15,14 +15,9 @@ public class DeletePostServiceImpl implements IPostService<String, Void> {
     private IPostRepository postRepository;
 
     public Void execute(String postId) {
-        try{
-            var post = this.postRepository.findById(ConvertFormatId.toUUID(postId));
-            if (!post.isPresent()) throw new Exception("Post not found!");
-            this.postRepository.delete(post.get());
-            return null;
-        } catch (Exception e){
-            if (e.getMessage() == "No value present") throw new HandleNotFoundException("Post not found!");
-            throw new HandleNotFoundException(e.getMessage());
-        }
+        var post = this.postRepository.findById(ConvertFormatId.toUUID(postId));
+        if (!post.isPresent()) throw new HandleNotFoundException("Post not found!");
+        this.postRepository.delete(post.get());
+        return null;
     }
 }

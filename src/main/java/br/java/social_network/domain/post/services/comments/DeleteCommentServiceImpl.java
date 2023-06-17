@@ -17,11 +17,7 @@ public class DeleteCommentServiceImpl  implements ICommentService<InputDataToCom
 
     @Override
     public String execute(InputDataToCommentService input){
-        try {
-            this.postService.execute(input);
-            return "Deleted comments";
-        } catch (Exception e) {
-            throw new HandleNotFoundException(e.getMessage());
-        }
+        this.postService.execute(input);
+        return "Deleted comments";
     }
 }

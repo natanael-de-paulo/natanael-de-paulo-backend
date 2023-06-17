@@ -22,12 +22,8 @@ public class FindPostServiceImpl implements IPostService<String, PostResponseDTO
 
     @Override
     public PostResponseDTO execute(String postId){
-        try {
-            var post = this.postRepository.findById(ConvertFormatId.toUUID(postId));
-            return this.postMapper.toDTO(post.get());
-        } catch (Exception e) {
-            if (e.getMessage() == "No value present") throw new HandleNotFoundException("Post not found!");
-            throw new HandleNotFoundException(e.getMessage());
-        }
+        var post = this.postRepository.findById(ConvertFormatId.toUUID(postId));
+        if (!post.isPresent()) throw new HandleNotFoundException("Post not found!");
+        return this.postMapper.toDTO(post.get());
     }
 }
