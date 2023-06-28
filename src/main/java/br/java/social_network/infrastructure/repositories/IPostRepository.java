@@ -11,6 +11,6 @@ public interface IPostRepository extends MongoRepository<Post, UUID> {
     @Query("{user_id: ?0}")
     List<Post> findAll(UUID user_id);
 
-    @Query("[{ $match: { 'user_id': { $in: ?0 } } }, { $sort: { 'createdAt': -1 } }, { $group: { '_id': '$user_id', 'latestPost': { $first: '$$ROOT' } } }, { $replaceRoot: { 'newRoot': '$latestPost' } }]")
+    @Query("{'user_id': { $in: ?0 }}")
     List<Post> findPostsByFollowingProfiles(List<UUID> followingProfiles);
 }

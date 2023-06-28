@@ -66,7 +66,7 @@ public class SecurityConfig {
             new AntPathRequestMatcher("/api/v1/auth", HttpMethod.POST.toString())
         );
 
-        http.csrf()
+        http.cors().and().csrf()
             .disable()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

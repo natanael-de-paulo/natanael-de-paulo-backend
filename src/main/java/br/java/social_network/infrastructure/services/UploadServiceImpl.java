@@ -16,7 +16,7 @@ public class UploadServiceImpl implements IUploadService {
     @Override
     public String upload(MultipartFile file){
         var user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        var fileName = user.getId() + "." + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+        var fileName = user.getId() + "-" + file.getOriginalFilename();
 
         var imagePath = "";
 

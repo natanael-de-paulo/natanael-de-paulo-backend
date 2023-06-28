@@ -38,7 +38,7 @@ public class FeedServiceImpl implements IFeedService {
 
             return feed.getPostsToFeed();
         } catch (Exception e) {
-            throw new RuntimeException("adasdasd");
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
